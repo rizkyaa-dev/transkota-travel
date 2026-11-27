@@ -1,0 +1,54 @@
+<div class="space-y-6">
+  <div class="transit-box p-6 sm:p-8">
+    <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+      <div><h1 class="text-xl font-extrabold uppercase text-ink">Laporan Operasional</h1>
+        <p class="text-xs text-muted mt-1">Periode berdasarkan tanggal keberangkatan. Maksimal 90 hari.</p></div>
+      <form method="GET" action="/admin/reports" class="flex flex-wrap items-end gap-3">
+        <label class="text-xs font-bold uppercase">Dari<input type="date" name="from" value="<%= from %>" required class="block mt-1 border-bar border-rule bg-paper px-3 py-2"></label>
+        <label class="text-xs font-bold uppercase">Sampai<input type="date" name="to" value="<%= to %>" required class="block mt-1 border-bar border-rule bg-paper px-3 py-2"></label>
+        <button class="transit-btn transit-btn-cobalt px-4 py-2.5 text-xs">Tampilkan</button>
+        <% if (report) { %><a href="/admin/reports/print?from=<%= encodeURIComponent(from) %>&to=<%= encodeURIComponent(to) %>" target="_blank" class="transit-btn transit-btn-ink px-4 py-2.5 text-xs">Cetak / Simpan PDF</a><% } %>
+      </form>
+    </div>
+    <% if (error) { %><div class="mt-4 border-bar border-red-600 bg-red-50 text-red-800 px-4 py-3 text-sm"><%= error %></div><% } %>
+  </div>
+
+  <% if (report) { const s = report.summary; const money = (value) => new Intl.NumberFormat('id-ID',{style:'currency',currency:'IDR',maximumFractionDigits:0}).format(Number(value || 0)); %>
+    <div class="grid grid-cols-2 xl:grid-cols-4 gap-3">
+      <div class="transit-box p-5"><span class="text-xs text-muted uppercase font-bold">Total Booking</span><p class="text-2xl font-extrabold mt-1"><%= s.total_booking %></p></div>
+      <div class="transit-box p-5"><span class="text-xs text-muted uppercase font-bold">Booking Lunas</span><p class="text-2xl font-extrabold mt-1"><%= s.booking_lunas %></p></div>
+      <div class="transit-box p-5"><span class="text-xs text-muted uppercase font-bold">Pendapatan Lunas</span><p class="text-xl font-extrabold mt-1"><%= money(s.pendapatan_lunas) %></p></div>
+      <div class="transit-box p-5"><span class="text-xs text-muted uppercase font-bold">Tagihan Tertunda</span><p class="text-xl font-extrabold mt-1"><%= money(s.tagihan_tertunda) %></p></div>
+    </div>
+
+    <div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+      <section class="transit-box p-6 overflow-x-auto"><h2 class="font-extrabold uppercase text-sm mb-4">Status Booking</h2>
+        <table class="w-full text-xs"><tbody>
+          <tr class="border-b-hair border-rule"><td class="py-2">Menunggu pembayaran / verifikasi</td><td class="py-2 text-right font-bold"><%= s.booking_menunggu %></td></tr>
+          <tr class="border-b-hair border-rule"><td class="py-2">Dibatalkan</td><td class="py-2 text-right font-bold"><%= s.booking_dibatalkan %></td></tr>
+          <tr><td class="py-2">Kedaluwarsa</td><td class="py-2 text-right font-bold"><%= s.booking_kedaluwarsa %></td></tr>
+        </tbody></table>
+      </section>
+      <section class="transit-box p-6 overflow-x-auto"><h2 class="font-extrabold uppercase text-sm mb-4">Pembayaran per Metode</h2>
+        <table class="w-full text-xs"><thead><tr class="border-b-bar border-rule text-left"><th class="py-2">Metode</th><th class="py-2 text-right">Transaksi</th><th class="py-2 text-right">Diterima</th></tr></thead><tbody>
+          <% report.payments.forEach((row) => { %><tr class="border-b-hair border-rule"><td class="py-2 uppercase"><%= row.metode.replace('_',' ') %></td><td class="py-2 text-right"><%= row.total_transaksi %></td><td class="py-2 text-right font-bold"><%= money(row.nominal_diterima) %></td></tr><% }) %>
+          <% if (!report.payments.length) { %><tr><td colspan="3" class="py-3 text-muted">Belum ada transaksi pembayaran.</td></tr><% } %>
+        </tbody></table>
+      </section>
+    </div>
+
+    <section class="transit-box p-6 overflow-x-auto"><h2 class="font-extrabold uppercase text-sm mb-4">Performa Rute</h2>
+      <table class="w-full text-xs"><thead><tr class="border-b-bar border-rule text-left uppercase"><th class="py-2">Rute</th><th class="py-2 text-right">Booking</th><th class="py-2 text-right">Pendapatan lunas</th></tr></thead><tbody>
+        <% report.routes.forEach((row) => { %><tr class="border-b-hair border-rule"><td class="py-2"><%= row.kota_asal %> → <%= row.kota_tujuan %></td><td class="py-2 text-right"><%= row.total_booking %></td><td class="py-2 text-right font-bold"><%= money(row.pendapatan_lunas) %></td></tr><% }) %>
+        <% if (!report.routes.length) { %><tr><td colspan="3" class="py-3 text-muted">Tidak ada booking pada periode ini.</td></tr><% } %>
+      </tbody></table>
+    </section>
+
+    <section class="transit-box p-6 overflow-x-auto"><h2 class="font-extrabold uppercase text-sm mb-4">Keberangkatan & Keterisian Kursi</h2>
+      <table class="w-full text-xs"><thead><tr class="border-b-bar border-rule text-left uppercase"><th class="py-2">Waktu</th><th class="py-2">Rute</th><th class="py-2">Armada</th><th class="py-2 text-right">Kursi dipesan / kapasitas</th><th class="py-2 text-right">Terjual</th><th class="py-2">Status</th></tr></thead><tbody>
+        <% report.schedules.forEach((row) => { %><tr class="border-b-hair border-rule"><td class="py-2"><%= new Date(row.berangkat_pada).toLocaleString('id-ID') %></td><td class="py-2"><%= row.kota_asal %> → <%= row.kota_tujuan %></td><td class="py-2"><%= row.nomor_polisi %></td><td class="py-2 text-right"><%= row.kursi_dipesan %> / <%= row.kapasitas %></td><td class="py-2 text-right"><%= row.kursi_terjual %></td><td class="py-2 uppercase"><%= row.status_jadwal %></td></tr><% }) %>
+        <% if (!report.schedules.length) { %><tr><td colspan="6" class="py-3 text-muted">Tidak ada jadwal pada periode ini.</td></tr><% } %>
+      </tbody></table>
+    </section>
+  <% } %>
+</div>

@@ -65,10 +65,16 @@ export class MemberController {
         jadwalId,
         seatIds,
         names,
-        phones
+        phones,
+        typeof req.body.kode_promo === 'string' ? req.body.kode_promo : undefined
       );
 
-      req.flash('success', 'Kursi berhasil ditahan! Harap segera lakukan pembayaran.');
+      req.flash(
+        'success',
+        Number((result as any).nominal_diskon) > 0
+          ? `Promo ${String((result as any).kode_promo)} diterapkan. Diskon Rp ${new Intl.NumberFormat('id-ID').format(Number((result as any).nominal_diskon))}. Silakan lanjutkan pembayaran.`
+          : 'Kursi berhasil ditahan! Harap segera lakukan pembayaran.'
+      );
       res.redirect(`/pesanan/${result.kode_booking}`);
     } catch (err: any) {
       req.flash('error', err.message || 'Gagal memproses reservasi kursi.');
@@ -88,6 +94,9 @@ export class MemberController {
         title: `Detail Pesanan Tiket: ${booking.kode_booking}`,
         booking,
         payment,
+        subtotal: Number((booking as any).subtotal ?? booking.total),
+        nominalDiskon: Number((booking as any).nominal_diskon ?? 0),
+        kodePromo: (booking as any).kode_promo ?? null,
         qrisEnabled,
         qrisEnvironment,
       });
@@ -229,7 +238,7 @@ export class MemberController {
       const { referensi, no_rek_pengirim } = req.body;
       if (!referensi || !no_rek_pengirim) {
         req.flash('error', 'Nomor referensi / resi dan nomor rekening pengirim wajib diisi.');
-        return res.redirect(`/pesanan/${code}/bayar`);
+        return res.redirect(`/pesanan/${code}/bayar?metode=transfer`);
       }
 
       await paymentService.submitPaymentProof(
@@ -243,8 +252,11 @@ export class MemberController {
       req.flash('success', 'Bukti transfer berhasil diunggah! Petugas loket akan segera memverifikasi pembayaran Anda.');
       res.redirect(`/pesanan/${code}`);
     } catch (err: any) {
-      req.flash('error', err.message || 'Gagal mengunggah bukti pembayaran.');
-      res.redirect(`/pesanan/${req.params.kode}/bayar`);
+      const message = err?.code === 'ER_DUP_ENTRY'
+        ? 'Nomor referensi transaksi ini sudah digunakan pada pembayaran lain. Periksa nomor resi yang benar atau hubungi petugas jika pembayaran Anda memang sudah tercatat.'
+        : (err.message || 'Gagal mengunggah bukti pembayaran.');
+      req.flash('error', message);
+      res.redirect(`/pesanan/${req.params.kode}/bayar?metode=transfer`);
     }
   }
 

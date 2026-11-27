@@ -89,6 +89,7 @@
     <% 
       const passengerList = (booking.details && booking.details.length > 0) ? booking.details : (booking.penumpang || []); 
       const totalAmount = booking.total_harga || booking.total || 0;
+      const bookingSubtotal = subtotal || totalAmount;
     %>
     <div>
       <h3 class="text-xs font-extrabold text-ink uppercase tracking-wider mb-3">Manifest Kursi & Penumpang</h3>
@@ -116,6 +117,14 @@
           </tbody>
           <tfoot class="bg-paper-3 font-extrabold border-t-bar border-rule">
             <tr>
+              <% if (nominalDiskon > 0) { %>
+              <td colspan="3" class="px-4 py-2 text-right text-muted uppercase">Subtotal:</td>
+              <td class="px-4 py-2 text-right text-muted num"><%= new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(bookingSubtotal) %></td>
+              </tr><tr>
+              <td colspan="3" class="px-4 py-2 text-right text-accent uppercase">Promo <%= kodePromo %>:</td>
+              <td class="px-4 py-2 text-right text-accent num">-<%= new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(nominalDiskon) %></td>
+              </tr><tr>
+              <% } %>
               <td colspan="3" class="px-4 py-3 text-right text-ink uppercase">Total Tagihan:</td>
               <td class="px-4 py-3 text-right text-base text-ink num">
                 <%= new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(totalAmount) %>

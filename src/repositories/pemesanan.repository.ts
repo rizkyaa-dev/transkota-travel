@@ -1,6 +1,7 @@
 import { pool } from '../config/database.js';
 import { PemesananRow, DetailPemesananRow } from '../types/db.types.js';
 import { RowDataPacket } from 'mysql2';
+import { promoRepository } from './promo.repository.js';
 
 export class PemesananRepository {
   async createBooking(
@@ -34,11 +35,15 @@ export class PemesananRepository {
   }
 
   async getBookingByCode(code: string): Promise<(PemesananRow & { details: DetailPemesananRow[] }) | null> {
+    await promoRepository.ensureSchema();
     const sqlOrder = `
       SELECT p.*, u.nama AS nama_pemesan, u.telepon AS telepon_pemesan,
              j.berangkat_pada, j.harga AS harga_jadwal,
              ka.nama AS kota_asal, kt.nama AS kota_tujuan,
-             k.jenis AS jenis_kendaraan, k.nomor_polisi
+             k.jenis AS jenis_kendaraan, k.nomor_polisi,
+             (p.total + COALESCE(pp.nominal_diskon, 0)) AS subtotal,
+             COALESCE(pp.nominal_diskon, 0) AS nominal_diskon,
+             pp.kode_snapshot AS kode_promo
       FROM pemesanan p
       JOIN users u ON u.id = p.id_pemesan
       JOIN jadwal j ON j.id = p.id_jadwal
@@ -46,6 +51,7 @@ export class PemesananRepository {
       JOIN kota ka ON ka.id = r.id_kota_asal
       JOIN kota kt ON kt.id = r.id_kota_tujuan
       JOIN kendaraan k ON k.id = j.id_kendaraan
+      LEFT JOIN promo_pemakaian pp ON pp.id_pemesanan = p.id
       WHERE p.kode_booking = ?
       LIMIT 1
     `;

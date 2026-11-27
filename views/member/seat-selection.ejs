@@ -73,6 +73,11 @@
 
       <!-- Ringkasan & Tombol Reservasi -->
       <div class="transit-box p-6">
+        <label for="kode_promo" class="block text-xs font-bold uppercase text-ink mb-1.5">Kode promo (opsional)</label>
+        <input id="kode_promo" name="kode_promo" type="text" maxlength="40" pattern="[A-Za-z0-9_-]+" autocomplete="off"
+          class="w-full border-bar border-rule bg-paper px-3.5 py-2 text-xs font-bold text-ink uppercase focus:outline-none focus:border-accent"
+          placeholder="Masukkan kode kupon">
+        <p class="text-[11px] text-muted mt-1 mb-4">Promo akan diperiksa saat booking dikonfirmasi.</p>
         <div class="flex items-center justify-between py-2 border-b-bar border-rule">
           <span class="text-xs font-bold uppercase text-muted">Total Pembayaran Tiket:</span>
           <span id="total-price-display" class="text-2xl font-extrabold text-ink num">Rp 0</span>

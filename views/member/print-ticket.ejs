@@ -104,13 +104,25 @@
             </strong>
           </div>
           <div class="sm:text-right">
-            <span class="text-muted uppercase font-bold block">Total Tarif</span>
+            <span class="text-muted uppercase font-bold block"><%= Number(booking.nominal_diskon || 0) > 0 ? 'Tarif setelah diskon' : 'Total Tarif' %></span>
             <strong class="text-ink num">
               <%= new Intl.NumberFormat('id-ID', { style: 'currency' , currency: 'IDR' , maximumFractionDigits: 0
                 }).format(booking.total) %>
             </strong>
           </div>
         </div>
+
+        <% if (Number(booking.nominal_diskon || 0) > 0 && booking.kode_promo) { %>
+          <div class="mt-4 border-bar border-rule bg-paper-2 p-3 text-xs">
+            <div class="font-extrabold uppercase text-ink mb-2">Rincian Kupon & Pembayaran</div>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <div><span class="text-muted uppercase font-bold block">Subtotal</span><strong class="text-ink num"><%= new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(Number(booking.subtotal || Number(booking.total) + Number(booking.nominal_diskon))) %></strong></div>
+              <div><span class="text-muted uppercase font-bold block">Kode Promo</span><strong class="text-ink"><%= booking.kode_promo %></strong></div>
+              <div><span class="text-muted uppercase font-bold block">Diskon</span><strong class="text-accent num">-<%= new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(Number(booking.nominal_diskon)) %></strong></div>
+              <div><span class="text-muted uppercase font-bold block">Total Dibayar</span><strong class="text-ink num"><%= new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(Number(booking.total)) %></strong></div>
+            </div>
+          </div>
+        <% } %>
       </div>
 
       <!-- Rincian Kursi dan Penumpang -->

@@ -3,6 +3,7 @@ import { pembayaranRepository } from '../repositories/pembayaran.repository.js';
 import { userRepository } from '../repositories/user.repository.js';
 import { PassengerInput } from '../types/booking.types.js';
 import crypto from 'crypto';
+import { promoRepository } from '../repositories/promo.repository.js';
 
 export class BookingService {
   async createOnlineBooking(
@@ -10,7 +11,8 @@ export class BookingService {
     jadwalId: number,
     seatIds: number[],
     names: string[],
-    phones?: (string | undefined)[]
+    phones?: (string | undefined)[],
+    promoCode?: string
   ) {
     if (!seatIds.length) {
       throw new Error('Harap pilih minimal 1 kursi.');
@@ -27,6 +29,9 @@ export class BookingService {
 
     const passengersJson = JSON.stringify(passengers);
 
+    if (promoCode?.trim()) {
+      return await promoRepository.createBookingWithPromo(userId, jadwalId, passengersJson, promoCode.trim().toUpperCase());
+    }
     return await pemesananRepository.createBooking(userId, jadwalId, passengersJson);
   }
 

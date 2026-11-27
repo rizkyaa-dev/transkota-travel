@@ -398,8 +398,9 @@ export class ApiController {
   // --- Member Booking & Complaints ---
   async createBooking(req: Request, res: Response, next: NextFunction) {
     try {
-      const { jadwal_id, penumpang } = req.body as {
+      const { jadwal_id, penumpang, kode_promo } = req.body as {
         jadwal_id: number;
+        kode_promo?: string;
         penumpang: Array<{
           id_jadwal_kursi: number;
           nama: string;
@@ -416,7 +417,8 @@ export class ApiController {
         jadwal_id,
         seatIds,
         names,
-        phones
+        phones,
+        kode_promo
       );
 
       return res

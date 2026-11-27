@@ -1,0 +1,37 @@
+<div class="space-y-6">
+  <div class="transit-box p-6">
+    <h1 class="text-xl font-extrabold uppercase text-ink">Kode Promo</h1>
+    <p class="text-xs text-muted mt-1">Buat kupon diskon dengan masa berlaku. Diskon dihitung server saat booking dibuat.</p>
+    <form action="/admin/promos" method="POST" class="grid grid-cols-1 md:grid-cols-4 gap-3 mt-5">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <label class="text-xs font-bold">Kode
+        <input name="kode" required maxlength="40" pattern="[A-Za-z0-9_-]+" class="mt-1 w-full border-bar border-rule bg-paper px-3 py-2 uppercase" placeholder="HEMAT20">
+      </label>
+      <label class="text-xs font-bold">Jenis diskon
+        <select name="jenis" class="mt-1 w-full border-bar border-rule bg-paper px-3 py-2"><option value="persen">Persentase</option><option value="nominal">Nominal rupiah</option></select>
+      </label>
+      <label class="text-xs font-bold">Nilai
+        <input name="nilai" type="number" min="0.01" step="0.01" required class="mt-1 w-full border-bar border-rule bg-paper px-3 py-2">
+      </label>
+      <label class="text-xs font-bold">Diskon maksimum (opsional)
+        <input name="diskon_maksimal" type="number" min="0.01" step="0.01" class="mt-1 w-full border-bar border-rule bg-paper px-3 py-2">
+      </label>
+      <label class="text-xs font-bold">Minimum booking
+        <input name="minimum_pemesanan" type="number" min="0" step="0.01" value="0" required class="mt-1 w-full border-bar border-rule bg-paper px-3 py-2">
+      </label>
+      <label class="text-xs font-bold">Mulai
+        <input name="mulai_pada" type="datetime-local" required class="mt-1 w-full border-bar border-rule bg-paper px-3 py-2">
+      </label>
+      <label class="text-xs font-bold">Berakhir
+        <input name="berakhir_pada" type="datetime-local" required class="mt-1 w-full border-bar border-rule bg-paper px-3 py-2">
+      </label>
+      <div class="flex items-end"><button class="transit-btn transit-btn-cobalt w-full py-2.5 text-xs">Buat kupon</button></div>
+    </form>
+  </div>
+  <div class="transit-box overflow-x-auto">
+    <table class="w-full text-xs"><thead><tr class="border-b-bar border-rule text-left uppercase"><th class="p-3">Kode</th><th class="p-3">Diskon</th><th class="p-3">Berlaku</th><th class="p-3">Status</th><th class="p-3">Aksi</th></tr></thead>
+      <tbody><% promos.forEach((promo) => { %><tr class="border-b-hair border-rule"><td class="p-3 font-mono font-bold"><%= promo.kode %></td><td class="p-3"><%= promo.jenis === 'persen' ? `${promo.nilai}%` : new Intl.NumberFormat('id-ID',{style:'currency',currency:'IDR',maximumFractionDigits:0}).format(promo.nilai) %><% if (promo.diskon_maksimal) { %> (maks. <%= promo.diskon_maksimal %>)<% } %><br><span class="text-muted">Min. <%= promo.minimum_pemesanan %></span></td><td class="p-3"><%= new Date(promo.mulai_pada).toLocaleString('id-ID') %><br>s/d <%= new Date(promo.berakhir_pada).toLocaleString('id-ID') %></td><td class="p-3"><%= promo.aktif ? 'Aktif' : 'Nonaktif' %> · <%= promo.jumlah_pemakaian %> pemakaian</td><td class="p-3"><form method="POST" action="/admin/promos/<%= promo.id %>/status"><input type="hidden" name="_csrf" value="<%= csrfToken %>"><input type="hidden" name="aktif" value="<%= promo.aktif ? '0' : '1' %>"><button class="transit-btn transit-btn-ink px-3 py-1.5"><%= promo.aktif ? 'Nonaktifkan' : 'Aktifkan' %></button></form></td></tr><% }) %></tbody>
+    </table>
+    <% if (!promos.length) { %><p class="p-6 text-sm text-muted">Belum ada kupon promo.</p><% } %>
+  </div>
+</div>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= title %></title>
+  <style>
+    :root{--ink:#172033;--muted:#667085;--blue:#2454d7;--blue-soft:#edf3ff;--line:#d9e0ea;--paper:#f4f6fa;--green:#087a55;--green-soft:#e8f7f0;--amber:#9a5b00;--amber-soft:#fff5df}
+    *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:14px/1.45 Inter,"Segoe UI",Arial,sans-serif}
+    .toolbar{position:sticky;top:0;z-index:5;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px max(20px,calc((100vw - 1180px)/2));background:#fff;border-bottom:1px solid var(--line);box-shadow:0 4px 18px #1720330d}
+    .toolbar-actions{display:flex;gap:10px}.button{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 16px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--ink);font:600 13px inherit;text-decoration:none;cursor:pointer}.button:hover{background:#f7f9fc}.button-primary{background:var(--blue);border-color:var(--blue);color:#fff}.button-primary:hover{background:#1946c4}
+    .page{max-width:1180px;margin:28px auto;padding:0 20px 36px}.report{background:white;border:1px solid var(--line);border-radius:16px;box-shadow:0 16px 48px #17203312;overflow:hidden}.report-head{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;padding:30px 34px;background:linear-gradient(120deg,#172d63,#2454d7);color:white}.brand{display:flex;align-items:center;gap:12px}.brand-mark{width:42px;height:42px;border-radius:11px;display:grid;place-items:center;background:#ffffff24;font-weight:900;font-size:20px}.eyebrow{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#c9d8ff;font-weight:800}.report-head h1{font-size:25px;line-height:1.2;letter-spacing:-.03em;margin:4px 0 8px}.report-head p{margin:0;color:#dce6ff;font-size:12px}.period{text-align:right;padding:11px 14px;border:1px solid #ffffff42;border-radius:10px;background:#ffffff12;min-width:190px}.period span{display:block;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#dce6ff}.period strong{display:block;margin-top:4px;font-size:13px}
+    .content{padding:26px 34px 34px}.section{margin-top:28px}.section:first-child{margin-top:0}.section-heading{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-bottom:12px}.section-heading h2{margin:0;font-size:13px;letter-spacing:.08em;text-transform:uppercase}.section-heading p{margin:0;color:var(--muted);font-size:11px}.summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.metric{position:relative;overflow:hidden;padding:16px;border:1px solid var(--line);border-radius:11px;background:#fff}.metric:after{content:"";position:absolute;top:0;left:0;bottom:0;width:4px;background:var(--blue)}.metric.green:after{background:var(--green)}.metric.amber:after{background:#d9981c}.metric-label{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}.metric-value{display:block;margin-top:7px;font-size:21px;line-height:1.2;font-weight:800;letter-spacing:-.02em}.metric.green .metric-value{color:var(--green)}.metric.amber .metric-value{color:var(--amber)}
+    .grid-two{display:grid;grid-template-columns:1fr 1fr;gap:16px}.panel{border:1px solid var(--line);border-radius:11px;overflow:hidden;background:#fff}.panel-title{padding:13px 15px;background:#f7f9fc;border-bottom:1px solid var(--line);font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;font-size:11px}thead th{padding:10px 12px;background:#f0f4fa;color:#475467;text-align:left;text-transform:uppercase;letter-spacing:.06em;font-size:9px;font-weight:800;white-space:nowrap}tbody td{padding:10px 12px;border-top:1px solid #e9edf3;vertical-align:top}tbody tr:nth-child(even){background:#fafbfd}.right{text-align:right;white-space:nowrap}.strong{font-weight:750}.status{display:inline-block;padding:3px 8px;border-radius:99px;background:var(--blue-soft);color:var(--blue);font-size:9px;font-weight:800;text-transform:uppercase}.empty{padding:17px 12px;color:var(--muted);text-align:center}
+    .report-foot{display:flex;justify-content:space-between;gap:16px;padding:14px 34px;border-top:1px solid var(--line);background:#fafbfd;color:var(--muted);font-size:10px}
+    @media(max-width:760px){.toolbar{padding:12px 16px}.page{margin:16px auto;padding:0 12px 20px}.report-head{padding:22px;display:block}.period{margin-top:18px;text-align:left}.content{padding:20px 16px}.summary{grid-template-columns:1fr 1fr}.grid-two{grid-template-columns:1fr}.report-foot{padding:12px 16px;display:block}.report-foot span{display:block;margin:3px 0}}
+    @page{size:A4 landscape;margin:12mm}@media print{body{background:#fff;font-size:11px}.toolbar{display:none}.page{max-width:none;margin:0;padding:0}.report{border:0;border-radius:0;box-shadow:none}.report-head{padding:18px 22px;-webkit-print-color-adjust:exact;print-color-adjust:exact}.report-head h1{font-size:21px}.content{padding:18px 22px}.summary{gap:8px}.metric{padding:11px;border-radius:6px}.metric-value{font-size:17px}.section{margin-top:18px}.section,.panel{break-inside:avoid}.panel{border-radius:6px}table{font-size:9px}thead th,tbody td{padding:7px 8px}.report-foot{padding:10px 22px}}
+    /* Ticket palette applied to the report header only. */
+    .report-head{background:#080d17!important;color:#fff}
+    .brand-mark{background:#fff;color:#080d17;border-radius:0}
+    .eyebrow,.period span{color:#aeb7c6}
+    .report-head p{color:#c3cad5}
+    .period{border-color:#7f8999;background:#ffffff12;border-radius:0}
+    .period strong{color:#f5b400}
+    @media print{.report-head{-webkit-print-color-adjust:exact;print-color-adjust:exact;background:#080d17!important}}
+  </style>
+</head>
+<body>
+  <% const s=report.summary; const money=(v)=>new Intl.NumberFormat('id-ID',{style:'currency',currency:'IDR',maximumFractionDigits:0}).format(Number(v||0)); %>
+  <nav class="toolbar" aria-label="Aksi laporan">
+    <a class="button" href="/admin/reports?from=<%= encodeURIComponent(from) %>&to=<%= encodeURIComponent(to) %>">← Kembali ke Laporan</a>
+    <div class="toolbar-actions">
+      <button class="button button-primary" type="button" onclick="window.print()">Cetak / Simpan PDF</button>
+    </div>
+  </nav>
+  <main class="page">
+    <article class="report">
+      <header class="report-head">
+        <div>
+          <div class="brand"><div class="brand-mark">T</div><div><div class="eyebrow">Travel Nusantara Jaya · Administrasi</div><h1>Laporan Operasional</h1><p>Ringkasan perjalanan, penjualan tiket, pembayaran, dan kapasitas armada.</p></div></div>
+        </div>
+        <div class="period"><span>Periode keberangkatan · WIB</span><strong><%= from %> — <%= to %></strong></div>
+      </header>
+      <div class="content">
+        <section class="section">
+          <div class="section-heading"><h2>Ikhtisar periode</h2><p>Booking dihitung menurut tanggal keberangkatan.</p></div>
+          <div class="summary">
+            <div class="metric"><span class="metric-label">Total booking</span><strong class="metric-value"><%= s.total_booking %></strong></div>
+            <div class="metric green"><span class="metric-label">Booking lunas</span><strong class="metric-value"><%= s.booking_lunas %></strong></div>
+            <div class="metric green"><span class="metric-label">Pendapatan lunas</span><strong class="metric-value"><%= money(s.pendapatan_lunas) %></strong></div>
+            <div class="metric amber"><span class="metric-label">Tagihan tertunda</span><strong class="metric-value"><%= money(s.tagihan_tertunda) %></strong></div>
+          </div>
+        </section>
+
+        <section class="section grid-two">
+          <div class="panel"><div class="panel-title">Status booking</div><table><thead><tr><th>Status</th><th class="right">Jumlah</th></tr></thead><tbody>
+            <tr><td>Menunggu pembayaran / verifikasi</td><td class="right strong"><%= s.booking_menunggu %></td></tr>
+            <tr><td>Dibatalkan</td><td class="right strong"><%= s.booking_dibatalkan %></td></tr>
+            <tr><td>Kedaluwarsa</td><td class="right strong"><%= s.booking_kedaluwarsa %></td></tr>
+          </tbody></table></div>
+          <div class="panel"><div class="panel-title">Pembayaran per metode</div><table><thead><tr><th>Metode</th><th class="right">Transaksi</th><th class="right">Nominal diterima</th></tr></thead><tbody>
+            <% report.payments.forEach((r)=>{ %><tr><td><span class="status"><%= r.metode.replace('_',' ') %></span></td><td class="right"><%= r.total_transaksi %></td><td class="right strong"><%= money(r.nominal_diterima) %></td></tr><% }) %>
+            <% if (!report.payments.length) { %><tr><td colspan="3" class="empty">Belum ada transaksi pembayaran pada periode ini.</td></tr><% } %>
+          </tbody></table></div>
+        </section>
+
+        <section class="section panel"><div class="panel-title">Performa rute</div><div class="table-wrap"><table><thead><tr><th>Rute perjalanan</th><th class="right">Booking</th><th class="right">Pendapatan lunas</th></tr></thead><tbody>
+          <% report.routes.forEach((r)=>{ %><tr><td class="strong"><%= r.kota_asal %> → <%= r.kota_tujuan %></td><td class="right"><%= r.total_booking %></td><td class="right strong"><%= money(r.pendapatan_lunas) %></td></tr><% }) %>
+          <% if (!report.routes.length) { %><tr><td colspan="3" class="empty">Tidak ada booking untuk periode ini.</td></tr><% } %>
+        </tbody></table></div></section>
+
+        <section class="section panel"><div class="panel-title">Keberangkatan & keterisian armada</div><div class="table-wrap"><table><thead><tr><th>Waktu keberangkatan</th><th>Rute</th><th>Armada</th><th class="right">Dipesan / kapasitas</th><th class="right">Terjual</th><th>Status</th></tr></thead><tbody>
+          <% report.schedules.forEach((r)=>{ %><tr><td><%= new Date(r.berangkat_pada).toLocaleString('id-ID',{dateStyle:'medium',timeStyle:'short',timeZone:'Asia/Jakarta'}) %></td><td class="strong"><%= r.kota_asal %> → <%= r.kota_tujuan %></td><td><%= r.nomor_polisi %></td><td class="right"><%= r.kursi_dipesan %> / <%= r.kapasitas %></td><td class="right strong"><%= r.kursi_terjual %></td><td><span class="status"><%= r.status_jadwal %></span></td></tr><% }) %>
+          <% if (!report.schedules.length) { %><tr><td colspan="6" class="empty">Tidak ada jadwal keberangkatan untuk periode ini.</td></tr><% } %>
+        </tbody></table></div></section>
+      </div>
+      <footer class="report-foot"><span>Dokumen internal · Laporan hanya untuk penggunaan administrasi.</span><span>Dicetak: <%= new Date().toLocaleString('id-ID',{dateStyle:'medium',timeStyle:'short',timeZone:'Asia/Jakarta'}) %> WIB</span></footer>
+    </article>
+  </main>
+</body>
+</html>

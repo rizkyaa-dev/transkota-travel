@@ -93,6 +93,7 @@ export const ApiScheduleFilterSchema = z.object({
 // --- Member Booking & Complaint Schemas ---
 export const ApiOnlineBookingSchema = z.object({
   jadwal_id: z.coerce.number().int().positive(),
+  kode_promo: z.string().trim().min(3).max(40).regex(/^[A-Za-z0-9_-]+$/).optional(),
   penumpang: z
     .array(
       z.object({
