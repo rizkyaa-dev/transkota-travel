@@ -7,7 +7,15 @@ import { testConnection } from '../config/database.js';
 import { authService } from '../services/auth.service.js';
 import { tokenService } from '../services/token.service.js';
 import { bookingService } from '../services/booking.service.js';
-import { paymentService } from '../services/payment.service.js';
+import {
+  InvalidWebhookSignatureError,
+  paymentService,
+} from '../services/payment.service.js';
+import {
+  GatewayAmountMismatchError,
+  GatewayTransactionNotFoundError,
+} from '../repositories/gateway-payment.repository.js';
+import { MidtransGatewayError } from '../services/payment-gateways/midtrans.provider.js';
 import { adminService } from '../services/admin.service.js';
 import { userRepository } from '../repositories/user.repository.js';
 import { ruteRepository } from '../repositories/rute.repository.js';
@@ -491,6 +499,116 @@ export class ApiController {
         )
       );
     } catch (err) {
+      return next(err);
+    }
+  }
+
+  async initiateQrisPayment(req: Request, res: Response, next: NextFunction) {
+    try {
+      const qris = await paymentService.initiateQrisPayment(
+        req.params.kode,
+        req.user!
+      );
+
+      return res.status(qris.reused ? 200 : 201).json(
+        apiSuccess(
+          {
+            payment_id: qris.paymentId,
+            kode_booking: qris.kodeBooking,
+            provider: qris.provider,
+            environment: qris.environment,
+            channel: qris.channel,
+            gateway_order_id: qris.gatewayOrderId,
+            gateway_transaction_id: qris.gatewayTransactionId,
+            amount: qris.amount,
+            status: qris.normalizedStatus,
+            provider_status: qris.providerStatus,
+            qr_string: qris.qrString,
+            qr_url: qris.qrUrl,
+            qr_svg: qris.qrSvg,
+            expires_at: qris.expiresAt ? qris.expiresAt.toISOString() : null,
+            reused: qris.reused,
+          },
+          qris.reused
+            ? 'Menggunakan transaksi QRIS aktif yang sudah tersedia.'
+            : 'Transaksi QRIS berhasil dibuat.'
+        )
+      );
+    } catch (err: any) {
+      if (err instanceof MidtransGatewayError) {
+        return res
+          .status(err.statusCode)
+          .json(apiError('PAYMENT_GATEWAY_ERROR', err.message));
+      }
+      return next(err);
+    }
+  }
+
+  async getQrisStatus(req: Request, res: Response, next: NextFunction) {
+    try {
+      const result = await paymentService.syncQrisPaymentStatus(
+        req.params.kode,
+        req.user!
+      );
+      return res.status(200).json(apiSuccess(result));
+    } catch (err: any) {
+      if (err instanceof MidtransGatewayError) {
+        return res
+          .status(err.statusCode)
+          .json(apiError('PAYMENT_GATEWAY_ERROR', err.message));
+      }
+      if (err instanceof GatewayAmountMismatchError) {
+        return res.status(422).json(apiError('AMOUNT_MISMATCH', err.message));
+      }
+      return next(err);
+    }
+  }
+
+  async cancelQrisPayment(req: Request, res: Response, next: NextFunction) {
+    try {
+      const result = await paymentService.cancelActiveQrisPayment(
+        req.params.kode,
+        req.user!
+      );
+      return res.status(200).json(
+        apiSuccess(
+          result,
+          result.cancelled
+            ? 'Transaksi QRIS aktif berhasil dibatalkan.'
+            : 'Tidak ada transaksi QRIS aktif pada pesanan ini.'
+        )
+      );
+    } catch (err) {
+      return next(err);
+    }
+  }
+
+  async handleMidtransWebhook(req: Request, res: Response, next: NextFunction) {
+    try {
+      const result = await paymentService.handleMidtransWebhook(req.body);
+      return res.status(200).json(
+        apiSuccess(
+          {
+            kode_booking: result.kodeBooking,
+            booking_status: result.bookingStatus,
+            payment_status: result.paymentStatus,
+            normalized_status: result.normalizedStatus,
+            idempotent: result.idempotent,
+            late_settlement_flagged: result.lateSettlementFlagged,
+          },
+          'Notifikasi webhook Midtrans berhasil diproses.'
+        )
+      );
+    } catch (err: any) {
+      if (err instanceof InvalidWebhookSignatureError) {
+        return res.status(403).json(apiError('INVALID_SIGNATURE', err.message));
+      }
+      if (err instanceof GatewayTransactionNotFoundError) {
+        return res.status(404).json(apiError('NOT_FOUND', err.message));
+      }
+      if (err instanceof GatewayAmountMismatchError) {
+        return res.status(422).json(apiError('AMOUNT_MISMATCH', err.message));
+      }
       return next(err);
     }
   }

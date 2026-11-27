@@ -104,7 +104,7 @@ export class PembayaranRepository {
       JOIN rute r ON r.id = j.id_rute
       JOIN kota ka ON ka.id = r.id_kota_asal
       JOIN kota kt ON kt.id = r.id_kota_tujuan
-      WHERE p.status = 'menunggu'
+      WHERE p.status = 'menunggu' AND p.metode = 'transfer_manual'
       ORDER BY p.diajukan_pada ASC
       LIMIT 200
     `;

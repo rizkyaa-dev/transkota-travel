@@ -14,6 +14,7 @@ import {
   ApiComplaintCreateSchema,
   ApiComplaintRespondSchema,
   ApiLoginSchema,
+  ApiMidtransWebhookSchema,
   ApiOnlineBookingSchema,
   ApiOrdersQuerySchema,
   ApiRegisterSchema,
@@ -115,6 +116,29 @@ v1.post(
   uploadReceipt.single('bukti'),
   validateBody(PaymentProofSchema),
   (req, res, next) => apiController.submitPayment(req, res, next)
+);
+v1.post(
+  '/bookings/:kode/qris',
+  requireApiAuth,
+  requireApiRole(['member']),
+  (req, res, next) => apiController.initiateQrisPayment(req, res, next)
+);
+v1.get(
+  '/bookings/:kode/qris/status',
+  requireApiAuth,
+  requireApiRole(['member']),
+  (req, res, next) => apiController.getQrisStatus(req, res, next)
+);
+v1.post(
+  '/bookings/:kode/qris/cancel',
+  requireApiAuth,
+  requireApiRole(['member']),
+  (req, res, next) => apiController.cancelQrisPayment(req, res, next)
+);
+v1.post(
+  '/webhooks/midtrans',
+  validateBody(ApiMidtransWebhookSchema),
+  (req, res, next) => apiController.handleMidtransWebhook(req, res, next)
 );
 v1.post(
   '/bookings/:kode/cancel',

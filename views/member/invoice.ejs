@@ -20,7 +20,13 @@
         <span class="w-8 h-8 bg-ink text-paper flex items-center justify-center font-bold text-sm flex-shrink-0">&#10003;</span>
         <div>
           <h3 class="text-xs font-extrabold uppercase tracking-tight">Tiket Lunas & Terkonfirmasi</h3>
-          <p class="text-xs text-muted">Pembayaran telah diverifikasi loket. Tiket resmi siap dicetak.</p>
+          <p class="text-xs text-muted">
+            <% if (payment && payment.metode === 'gateway') { %>
+              Pembayaran QRIS telah terkonfirmasi otomatis. Tiket resmi siap dicetak.
+            <% } else { %>
+              Pembayaran telah diverifikasi loket. Tiket resmi siap dicetak.
+            <% } %>
+          </p>
         </div>
       </div>
       <a href="/pesanan/<%= booking.kode_booking %>/cetak" target="_blank" class="transit-btn transit-btn-cobalt text-xs py-2 px-4">
@@ -120,11 +126,36 @@
       </div>
     </div>
 
-    <!-- Instruksi Pembayaran Bank -->
+    <!-- Instruksi Pembayaran: QRIS Instan & Transfer Bank Manual -->
     <% if (booking.status === 'menunggu_pembayaran') { %>
       <div class="border-t-bar border-rule pt-6 space-y-4">
-        <h4 class="text-xs font-extrabold uppercase text-ink">Instruksi Pembayaran Transfer Bank</h4>
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <h4 class="text-xs font-extrabold uppercase text-ink">Pilihan Metode Pembayaran</h4>
+          <% if (typeof qrisEnabled !== 'undefined' && qrisEnabled) { %>
+            <span class="px-2 py-0.5 border-hair border-rule bg-paper-3 text-[10px] font-bold uppercase text-accent">
+              QRIS Otomatis Tersedia
+            </span>
+          <% } %>
+        </div>
+
+        <% if (typeof qrisEnabled !== 'undefined' && qrisEnabled) { %>
+          <div class="p-4 border-bar border-ink bg-paper-3 text-xs space-y-2">
+            <div class="flex items-center justify-between gap-2">
+              <strong class="text-ink uppercase tracking-wide">1. QRIS Instan (Midtrans) &mdash; Rekomendasi</strong>
+              <% if (typeof qrisEnvironment !== 'undefined' && qrisEnvironment === 'sandbox') { %>
+                <span class="px-2 py-0.5 border-hair border-ink bg-accent-2 text-ink text-[10px] font-extrabold uppercase">Sandbox</span>
+              <% } %>
+            </div>
+            <p class="text-muted">
+              Scan kode QRIS dengan e-wallet atau mobile banking sebesar <strong class="text-ink num"><%= new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(totalAmount) %></strong>. Tiket langsung terkonfirmasi <strong class="text-ink">LUNAS</strong> otomatis tanpa unggah struk.
+            </p>
+          </div>
+        <% } %>
+
         <div class="p-4 border-bar border-rule bg-paper-3 text-xs space-y-2">
+          <strong class="text-ink uppercase tracking-wide block">
+            <%= (typeof qrisEnabled !== 'undefined' && qrisEnabled) ? '2. Transfer Bank Manual (Verifikasi Petugas)' : 'Instruksi Pembayaran Transfer Bank' %>
+          </strong>
           <p class="text-muted">Transfer tepat nominal <strong class="text-ink num"><%= new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(totalAmount) %></strong> ke rekening resmi travel:</p>
           <div class="bg-paper p-3 border-bar border-rule font-mono text-xs">
             <div>Bank: <strong class="text-ink">BCA (Bank Central Asia)</strong></div>
@@ -133,11 +164,20 @@
           </div>
         </div>
 
-        <div class="flex flex-col sm:flex-row gap-3 pt-2">
-          <a href="/pesanan/<%= booking.kode_booking %>/bayar" class="flex-1 transit-btn transit-btn-cobalt py-3 text-xs">
-            Unggah Bukti Transfer Sekarang
-          </a>
-          
+        <div class="flex flex-col sm:flex-row flex-wrap gap-3 pt-2">
+          <% if (typeof qrisEnabled !== 'undefined' && qrisEnabled) { %>
+            <a href="/pesanan/<%= booking.kode_booking %>/bayar?metode=qris" class="flex-1 transit-btn transit-btn-cobalt py-3 text-xs">
+              Bayar Instan via QRIS
+            </a>
+            <a href="/pesanan/<%= booking.kode_booking %>/bayar?metode=transfer" class="transit-btn transit-btn-ink py-3 px-4 text-xs">
+              Unggah Bukti Transfer
+            </a>
+          <% } else { %>
+            <a href="/pesanan/<%= booking.kode_booking %>/bayar" class="flex-1 transit-btn transit-btn-cobalt py-3 text-xs">
+              Unggah Bukti Transfer Sekarang
+            </a>
+          <% } %>
+
           <form action="/pesanan/<%= booking.kode_booking %>/batal" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin membatalkan pesanan ini?');">
             <input type="hidden" name="_csrf" value="<%= csrfToken %>">
             <input type="hidden" name="alasan" value="Dibatalkan secara mandiri oleh pelanggan">
@@ -154,10 +194,11 @@
       <div class="border-t-bar border-rule pt-6">
         <h4 class="text-xs font-extrabold text-ink uppercase mb-2">Riwayat Konfirmasi Pembayaran</h4>
         <div class="text-xs text-muted space-y-1">
-          <p>Metode: <strong class="text-ink uppercase"><%= payment.metode %></strong></p>
+          <p>Metode: <strong class="text-ink uppercase"><%= payment.metode === 'gateway' ? 'QRIS (Midtrans Gateway)' : payment.metode.replace('_', ' ') %></strong></p>
           <p>Status: <strong class="text-ink uppercase"><%= payment.status %></strong></p>
           <% if (payment.referensi) { %><p>Referensi: <strong class="text-ink font-mono"><%= payment.referensi %></strong></p><% } %>
           <% if (payment.catatan_operator) { %><p class="text-accent-2 font-bold">Catatan Petugas: <%= payment.catatan_operator %></p><% } %>
+          <% if (payment.alasan_penolakan) { %><p class="text-muted font-bold">Catatan: <%= payment.alasan_penolakan %></p><% } %>
         </div>
       </div>
     <% } %>

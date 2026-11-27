@@ -181,3 +181,16 @@ export const ApiMasterJadwalSchema = z.object({
   tiba_pada: z.string().trim().optional().nullable(),
   harga: z.coerce.number().positive('Harga tiket harus lebih dari 0.'),
 });
+
+export const ApiMidtransWebhookSchema = z
+  .object({
+    order_id: z.string().trim().min(1, 'order_id wajib diisi.'),
+    status_code: z.coerce.string().trim().min(1, 'status_code wajib diisi.'),
+    gross_amount: z.coerce.string().trim().min(1, 'gross_amount wajib diisi.'),
+    signature_key: z.string().trim().min(1, 'signature_key wajib diisi.'),
+    transaction_status: z.string().trim().min(1, 'transaction_status wajib diisi.'),
+    transaction_id: z.string().trim().optional(),
+    fraud_status: z.string().trim().optional(),
+    payment_type: z.string().trim().optional(),
+  })
+  .passthrough();

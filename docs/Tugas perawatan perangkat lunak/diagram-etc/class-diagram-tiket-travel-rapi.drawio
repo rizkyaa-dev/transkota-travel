@@ -1,0 +1,309 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Page-1" id="f4NU8g8CMxnRBIAgRN2f">
+    <mxGraphModel dx="1926" dy="1882" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" background="light-dark(#F8FAFC,#F8FAFC)" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="diagram_title" parent="1" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Arial;fontSize=32;fontStyle=1;fontColor=light-dark(#162B46,#162B46);strokeColor=none;fillColor=none;connectable=0;" value="Diagram Kelas Tiket Travel" vertex="1">
+          <mxGeometry height="58" width="1252" x="56" y="24" as="geometry" />
+        </mxCell>
+        <mxCell id="diagram_title_rule" parent="1" style="line;html=1;strokeColor=light-dark(#CDD8E6,#CDD8E6);strokeWidth=1;movable=0;resizable=0;connectable=0;" value="" vertex="1">
+          <mxGeometry height="1" width="1252" x="56" y="99" as="geometry" />
+        </mxCell>
+        <mxCell id="kota" parent="1" style="swimlane;startSize=42;horizontal=1;rounded=0;html=1;fillColor=light-dark(#EAF1FB,#EAF1FB);swimlaneFillColor=light-dark(#FFFFFF,#FFFFFF);strokeColor=light-dark(#8A9DB5,#8A9DB5);strokeWidth=1.25;fontColor=light-dark(#162B46,#162B46);fontFamily=Arial;fontSize=19;fontStyle=1;align=center;verticalAlign=middle;collapsible=0;" value="Kota" vertex="1">
+          <mxGeometry height="104" width="320" x="522" y="126" as="geometry" />
+        </mxCell>
+        <mxCell id="kota_body" parent="kota" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;spacing=0;spacingLeft=15;spacingTop=8;fontColor=light-dark(#23374D,#23374D);fontFamily=Arial;fontSize=16;resizable=0;movable=0;connectable=0;" value="&lt;div style=&quot;line-height:22px&quot;&gt;+ INT id&lt;br&gt;+ VARCHAR nama&lt;/div&gt;" vertex="1">
+          <mxGeometry height="62" width="320" y="42" as="geometry" />
+        </mxCell>
+        <mxCell id="arsip" parent="1" style="swimlane;startSize=42;horizontal=1;rounded=0;html=1;fillColor=light-dark(#EFF2F7,#EFF2F7);swimlaneFillColor=light-dark(#FFFFFF,#FFFFFF);strokeColor=light-dark(#8A9DB5,#8A9DB5);strokeWidth=1.25;fontColor=light-dark(#162B46,#162B46);fontFamily=Arial;fontSize=19;fontStyle=1;align=center;verticalAlign=middle;collapsible=0;" value="ArsipMigrasi" vertex="1">
+          <mxGeometry height="192" width="320" x="56" y="126" as="geometry" />
+        </mxCell>
+        <mxCell id="arsip_body" parent="arsip" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;spacing=0;spacingLeft=15;spacingTop=8;fontColor=light-dark(#23374D,#23374D);fontFamily=Arial;fontSize=16;resizable=0;movable=0;connectable=0;" value="&lt;div style=&quot;line-height:22px&quot;&gt;+ BIGINT id&lt;br&gt;+ VARCHAR tabel_asal&lt;br&gt;+ VARCHAR kunci_asal&lt;br&gt;+ VARCHAR alasan&lt;br&gt;+ JSON data_asal&lt;br&gt;+ DATETIME diarsipkan_pada&lt;/div&gt;" vertex="1">
+          <mxGeometry height="150" width="320" y="42" as="geometry" />
+        </mxCell>
+        <mxCell id="kendaraan" parent="1" style="swimlane;startSize=42;horizontal=1;rounded=0;html=1;fillColor=light-dark(#EAF1FB,#EAF1FB);swimlaneFillColor=light-dark(#FFFFFF,#FFFFFF);strokeColor=light-dark(#8A9DB5,#8A9DB5);strokeWidth=1.25;fontColor=light-dark(#162B46,#162B46);fontFamily=Arial;fontSize=19;fontStyle=1;align=center;verticalAlign=middle;collapsible=0;" value="Kendaraan" vertex="1">
+          <mxGeometry height="170" width="320" x="988" y="126" as="geometry" />
+        </mxCell>
+        <mxCell id="kendaraan_body" parent="kendaraan" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;spacing=0;spacingLeft=15;spacingTop=8;fontColor=light-dark(#23374D,#23374D);fontFamily=Arial;fontSize=16;resizable=0;movable=0;connectable=0;" value="&lt;div style=&quot;line-height:22px&quot;&gt;+ INT id&lt;br&gt;+ VARCHAR jenis&lt;br&gt;+ VARCHAR nomor_polisi&lt;br&gt;+ VARCHAR warna&lt;br&gt;+ ENUM status&lt;/div&gt;" vertex="1">
+          <mxGeometry height="128" width="320" y="42" as="geometry" />
+        </mxCell>
+        <mxCell id="rute" parent="1" style="swimlane;startSize=42;horizontal=1;rounded=0;html=1;fillColor=light-dark(#EAF1FB,#EAF1FB);swimlaneFillColor=light-dark(#FFFFFF,#FFFFFF);strokeColor=light-dark(#8A9DB5,#8A9DB5);strokeWidth=1.25;fontColor=light-dark(#162B46,#162B46);fontFamily=Arial;fontSize=19;fontStyle=1;align=center;verticalAlign=middle;collapsible=0;" value="Rute" vertex="1">
+          <mxGeometry height="148" width="320" x="522" y="374" as="geometry" />
+        </mxCell>
+        <mxCell id="rute_body" parent="rute" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;spacing=0;spacingLeft=15;spacingTop=8;fontColor=light-dark(#23374D,#23374D);fontFamily=Arial;fontSize=16;resizable=0;movable=0;connectable=0;" value="&lt;div style=&quot;line-height:22px&quot;&gt;+ INT id&lt;br&gt;+ INT id_kota_asal&lt;br&gt;+ INT id_kota_tujuan&lt;br&gt;+ BOOLEAN aktif&lt;/div&gt;" vertex="1">
+          <mxGeometry height="106" width="320" y="42" as="geometry" />
+        </mxCell>
+        <mxCell id="users" parent="1" style="swimlane;startSize=42;horizontal=1;rounded=0;html=1;fillColor=light-dark(#EFF2F7,#EFF2F7);swimlaneFillColor=light-dark(#FFFFFF,#FFFFFF);strokeColor=light-dark(#8A9DB5,#8A9DB5);strokeWidth=1.25;fontColor=light-dark(#162B46,#162B46);fontFamily=Arial;fontSize=19;fontStyle=1;align=center;verticalAlign=middle;collapsible=0;" value="Users" vertex="1">
+          <mxGeometry height="390" width="320" x="56" y="1048" as="geometry" />
+        </mxCell>
+        <mxCell id="users_body" parent="users" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;spacing=0;spacingLeft=15;spacingTop=8;fontColor=light-dark(#23374D,#23374D);fontFamily=Arial;fontSize=16;resizable=0;movable=0;connectable=0;" value="&lt;div style=&quot;line-height:22px&quot;&gt;+ BIGINT id&lt;br&gt;+ VARCHAR username&lt;br&gt;+ VARCHAR email&lt;br&gt;+ VARCHAR nama&lt;br&gt;+ VARCHAR telepon&lt;br&gt;+ TEXT alamat&lt;br&gt;+ ENUM jenis_kelamin&lt;br&gt;+ ENUM role&lt;br&gt;+ VARCHAR password_hash&lt;br&gt;+ BOOLEAN wajib_reset_password&lt;br&gt;+ ENUM status_akun&lt;br&gt;+ ENUM sumber_legacy&lt;br&gt;+ BIGINT id_legacy&lt;br&gt;+ DATETIME dibuat_pada&lt;br&gt;+ DATETIME diperbarui_pada&lt;/div&gt;" vertex="1">
+          <mxGeometry height="348" width="320" y="42" as="geometry" />
+        </mxCell>
+        <mxCell id="kursi" parent="1" style="swimlane;startSize=42;horizontal=1;rounded=0;html=1;fillColor=light-dark(#EAF1FB,#EAF1FB);swimlaneFillColor=light-dark(#FFFFFF,#FFFFFF);strokeColor=light-dark(#8A9DB5,#8A9DB5);strokeWidth=1.25;fontColor=light-dark(#162B46,#162B46);fontFamily=Arial;fontSize=19;fontStyle=1;align=center;verticalAlign=middle;collapsible=0;" value="KursiKendaraan" vertex="1">
+          <mxGeometry height="170" width="320" x="988" y="374" as="geometry" />
+        </mxCell>
+        <mxCell id="kursi_body" parent="kursi" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;spacing=0;spacingLeft=15;spacingTop=8;fontColor=light-dark(#23374D,#23374D);fontFamily=Arial;fontSize=16;resizable=0;movable=0;connectable=0;" value="&lt;div style=&quot;line-height:22px&quot;&gt;+ BIGINT id&lt;br&gt;+ INT id_kendaraan&lt;br&gt;+ VARCHAR nomor&lt;br&gt;+ SMALLINT urutan&lt;br&gt;+ BOOLEAN aktif&lt;/div&gt;" vertex="1">
+          <mxGeometry height="128" width="320" y="42" as="geometry" />
+        </mxCell>
+        <mxCell id="jadwal" parent="1" style="swimlane;startSize=42;horizontal=1;rounded=0;html=1;fillColor=light-dark(#EAF1FB,#EAF1FB);swimlaneFillColor=light-dark(#FFFFFF,#FFFFFF);strokeColor=light-dark(#8A9DB5,#8A9DB5);strokeWidth=1.25;fontColor=light-dark(#162B46,#162B46);fontFamily=Arial;fontSize=19;fontStyle=1;align=center;verticalAlign=middle;collapsible=0;" value="Jadwal" vertex="1">
+          <mxGeometry height="214" width="320" x="522" y="622" as="geometry" />
+        </mxCell>
+        <mxCell id="jadwal_body" parent="jadwal" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;spacing=0;spacingLeft=15;spacingTop=8;fontColor=light-dark(#23374D,#23374D);fontFamily=Arial;fontSize=16;resizable=0;movable=0;connectable=0;" value="&lt;div style=&quot;line-height:22px&quot;&gt;+ BIGINT id&lt;br&gt;+ INT id_rute&lt;br&gt;+ INT id_kendaraan&lt;br&gt;+ DATETIME berangkat_pada&lt;br&gt;+ DATETIME tiba_pada&lt;br&gt;+ DECIMAL harga&lt;br&gt;+ ENUM status&lt;/div&gt;" vertex="1">
+          <mxGeometry height="172" width="320" y="42" as="geometry" />
+        </mxCell>
+        <mxCell id="pesan" parent="1" style="swimlane;startSize=42;horizontal=1;rounded=0;html=1;fillColor=light-dark(#EAF4F2,#EAF4F2);swimlaneFillColor=light-dark(#FFFFFF,#FFFFFF);strokeColor=light-dark(#8A9DB5,#8A9DB5);strokeWidth=1.25;fontColor=light-dark(#162B46,#162B46);fontFamily=Arial;fontSize=19;fontStyle=1;align=center;verticalAlign=middle;collapsible=0;" value="Pemesanan" vertex="1">
+          <mxGeometry height="302" width="320" x="522" y="1048" as="geometry" />
+        </mxCell>
+        <mxCell id="pesan_body" parent="pesan" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;spacing=0;spacingLeft=15;spacingTop=8;fontColor=light-dark(#23374D,#23374D);fontFamily=Arial;fontSize=16;resizable=0;movable=0;connectable=0;" value="&lt;div style=&quot;line-height:22px&quot;&gt;+ BIGINT id&lt;br&gt;+ VARCHAR kode_booking&lt;br&gt;+ BIGINT id_pemesan&lt;br&gt;+ BIGINT id_jadwal&lt;br&gt;+ ENUM status&lt;br&gt;+ DECIMAL total&lt;br&gt;+ DATETIME jatuh_tempo&lt;br&gt;+ DATETIME dibuat_pada&lt;br&gt;+ DATETIME diperbarui_pada&lt;br&gt;+ VARCHAR alasan_pembatalan&lt;br&gt;+ VARCHAR status_legacy&lt;/div&gt;" vertex="1">
+          <mxGeometry height="260" width="320" y="42" as="geometry" />
+        </mxCell>
+        <mxCell id="jadwalkursi" parent="1" style="swimlane;startSize=42;horizontal=1;rounded=0;html=1;fillColor=light-dark(#EAF1FB,#EAF1FB);swimlaneFillColor=light-dark(#FFFFFF,#FFFFFF);strokeColor=light-dark(#8A9DB5,#8A9DB5);strokeWidth=1.25;fontColor=light-dark(#162B46,#162B46);fontFamily=Arial;fontSize=19;fontStyle=1;align=center;verticalAlign=middle;collapsible=0;" value="JadwalKursi" vertex="1">
+          <mxGeometry height="214" width="320" x="988" y="622" as="geometry" />
+        </mxCell>
+        <mxCell id="jadwalkursi_body" parent="jadwalkursi" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;spacing=0;spacingLeft=15;spacingTop=8;fontColor=light-dark(#23374D,#23374D);fontFamily=Arial;fontSize=16;resizable=0;movable=0;connectable=0;" value="&lt;div style=&quot;line-height:22px&quot;&gt;+ BIGINT id&lt;br&gt;+ BIGINT id_jadwal&lt;br&gt;+ INT id_kendaraan&lt;br&gt;+ BIGINT id_kursi&lt;br&gt;+ ENUM status&lt;br&gt;+ BIGINT id_detail_pemesanan&lt;br&gt;+ DATETIME ditahan_sampai&lt;/div&gt;" vertex="1">
+          <mxGeometry height="172" width="320" y="42" as="geometry" />
+        </mxCell>
+        <mxCell id="keluhan" parent="1" style="swimlane;startSize=42;horizontal=1;rounded=0;html=1;fillColor=light-dark(#EFF2F7,#EFF2F7);swimlaneFillColor=light-dark(#FFFFFF,#FFFFFF);strokeColor=light-dark(#8A9DB5,#8A9DB5);strokeWidth=1.25;fontColor=light-dark(#162B46,#162B46);fontFamily=Arial;fontSize=19;fontStyle=1;align=center;verticalAlign=middle;collapsible=0;" value="Keluhan" vertex="1">
+          <mxGeometry height="302" width="320" x="56" y="622" as="geometry" />
+        </mxCell>
+        <mxCell id="keluhan_body" parent="keluhan" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;spacing=0;spacingLeft=15;spacingTop=8;fontColor=light-dark(#23374D,#23374D);fontFamily=Arial;fontSize=16;resizable=0;movable=0;connectable=0;" value="&lt;div style=&quot;line-height:22px&quot;&gt;+ BIGINT id&lt;br&gt;+ BIGINT id_user&lt;br&gt;+ BIGINT id_pemesanan&lt;br&gt;+ VARCHAR judul&lt;br&gt;+ TEXT isi&lt;br&gt;+ ENUM status&lt;br&gt;+ TEXT tanggapan&lt;br&gt;+ BIGINT ditangani_oleh&lt;br&gt;+ DATETIME dibuat_pada&lt;br&gt;+ DATETIME diperbarui_pada&lt;br&gt;+ DATETIME selesai_pada&lt;/div&gt;" vertex="1">
+          <mxGeometry height="260" width="320" y="42" as="geometry" />
+        </mxCell>
+        <mxCell id="bayar" parent="1" style="swimlane;startSize=42;horizontal=1;rounded=0;html=1;fillColor=light-dark(#EAF4F2,#EAF4F2);swimlaneFillColor=light-dark(#FFFFFF,#FFFFFF);strokeColor=light-dark(#8A9DB5,#8A9DB5);strokeWidth=1.25;fontColor=light-dark(#162B46,#162B46);fontFamily=Arial;fontSize=19;fontStyle=1;align=center;verticalAlign=middle;collapsible=0;" value="Pembayaran" vertex="1">
+          <mxGeometry height="346" width="320" x="522" y="1560" as="geometry" />
+        </mxCell>
+        <mxCell id="bayar_body" parent="bayar" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;spacing=0;spacingLeft=15;spacingTop=8;fontColor=light-dark(#23374D,#23374D);fontFamily=Arial;fontSize=16;resizable=0;movable=0;connectable=0;" value="&lt;div style=&quot;line-height:22px&quot;&gt;+ BIGINT id&lt;br&gt;+ BIGINT id_pemesanan&lt;br&gt;+ ENUM metode&lt;br&gt;+ VARCHAR referensi&lt;br&gt;+ VARCHAR no_rek_pengirim&lt;br&gt;+ DECIMAL nominal&lt;br&gt;+ VARCHAR bukti_pembayaran&lt;br&gt;+ ENUM status&lt;br&gt;+ DATETIME diajukan_pada&lt;br&gt;+ BIGINT diverifikasi_oleh&lt;br&gt;+ DATETIME diverifikasi_pada&lt;br&gt;+ VARCHAR alasan_penolakan&lt;br&gt;+ BOOLEAN perlu_verifikasi_data&lt;/div&gt;" vertex="1">
+          <mxGeometry height="304" width="320" y="42" as="geometry" />
+        </mxCell>
+        <mxCell id="detail" parent="1" style="swimlane;startSize=42;horizontal=1;rounded=0;html=1;fillColor=light-dark(#EAF4F2,#EAF4F2);swimlaneFillColor=light-dark(#FFFFFF,#FFFFFF);strokeColor=light-dark(#8A9DB5,#8A9DB5);strokeWidth=1.25;fontColor=light-dark(#162B46,#162B46);fontFamily=Arial;fontSize=19;fontStyle=1;align=center;verticalAlign=middle;collapsible=0;" value="DetailPemesanan" vertex="1">
+          <mxGeometry height="214" width="320" x="988" y="1048" as="geometry" />
+        </mxCell>
+        <mxCell id="detail_body" parent="detail" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;spacing=0;spacingLeft=15;spacingTop=8;fontColor=light-dark(#23374D,#23374D);fontFamily=Arial;fontSize=16;resizable=0;movable=0;connectable=0;" value="&lt;div style=&quot;line-height:22px&quot;&gt;+ BIGINT id&lt;br&gt;+ BIGINT id_pemesanan&lt;br&gt;+ BIGINT id_jadwal&lt;br&gt;+ BIGINT id_jadwal_kursi&lt;br&gt;+ VARCHAR nama_penumpang&lt;br&gt;+ VARCHAR telepon_penumpang&lt;br&gt;+ DECIMAL harga&lt;/div&gt;" vertex="1">
+          <mxGeometry height="172" width="320" y="42" as="geometry" />
+        </mxCell>
+        <mxCell id="edge0" edge="1" parent="1" source="kota" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=none;endArrow=open;endFill=0;endSize=9;strokeColor=light-dark(#53657D,#53657D);strokeWidth=1.5;fontColor=light-dark(#23374D,#23374D);fontFamily=Arial;fontSize=14;spacing=4;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);exitX=0.25;exitY=1;exitPerimeter=0;entryX=0.25;entryY=0;entryPerimeter=0;" target="rute" value="kota asal">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge0_s" connectable="0" parent="edge0" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontColor=light-dark(#53657D,#53657D);fontFamily=Arial;fontSize=13;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);" value="1" vertex="1">
+          <mxGeometry relative="1" x="-1" as="geometry">
+            <mxPoint x="-11" y="16" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge0_t" connectable="0" parent="edge0" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontColor=light-dark(#53657D,#53657D);fontFamily=Arial;fontSize=13;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);" value="0..*" vertex="1">
+          <mxGeometry relative="1" x="1" as="geometry">
+            <mxPoint x="19" y="-15" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge1" edge="1" parent="1" source="kota" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=none;endArrow=open;endFill=0;endSize=9;strokeColor=light-dark(#53657D,#53657D);strokeWidth=1.5;fontColor=light-dark(#23374D,#23374D);fontFamily=Arial;fontSize=14;spacing=4;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);exitX=0.75;exitY=1;exitPerimeter=0;entryX=0.75;entryY=0;entryPerimeter=0;" target="rute" value="kota tujuan">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge1_s" connectable="0" parent="edge1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontColor=light-dark(#53657D,#53657D);fontFamily=Arial;fontSize=13;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);" value="1" vertex="1">
+          <mxGeometry relative="1" x="-1" as="geometry">
+            <mxPoint x="-11" y="16" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge1_t" connectable="0" parent="edge1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontColor=light-dark(#53657D,#53657D);fontFamily=Arial;fontSize=13;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);" value="0..*" vertex="1">
+          <mxGeometry relative="1" x="1" as="geometry">
+            <mxPoint x="19" y="-15" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge2" edge="1" parent="1" source="kendaraan" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=none;endArrow=open;endFill=0;endSize=9;strokeColor=light-dark(#53657D,#53657D);strokeWidth=1.5;fontColor=light-dark(#23374D,#23374D);fontFamily=Arial;fontSize=14;spacing=4;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);exitX=0.55;exitY=1;exitPerimeter=0;entryX=0.55;entryY=0;entryPerimeter=0;" target="kursi" value="memiliki">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge2_s" connectable="0" parent="edge2" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontColor=light-dark(#53657D,#53657D);fontFamily=Arial;fontSize=13;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);" value="1" vertex="1">
+          <mxGeometry relative="1" x="-1" as="geometry">
+            <mxPoint x="-11" y="16" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge2_t" connectable="0" parent="edge2" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontColor=light-dark(#53657D,#53657D);fontFamily=Arial;fontSize=13;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);" value="0..*" vertex="1">
+          <mxGeometry relative="1" x="1" as="geometry">
+            <mxPoint x="19" y="-15" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge3" edge="1" parent="1" source="kendaraan" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=none;endArrow=open;endFill=0;endSize=9;strokeColor=light-dark(#53657D,#53657D);strokeWidth=1.5;fontColor=light-dark(#23374D,#23374D);fontFamily=Arial;fontSize=14;spacing=4;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);exitX=0;exitY=0.55;exitPerimeter=0;entryX=1;entryY=0.26;entryPerimeter=0;" target="jadwal" value="digunakan">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge3_s" connectable="0" parent="edge3" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontColor=light-dark(#53657D,#53657D);fontFamily=Arial;fontSize=13;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);" value="1" vertex="1">
+          <mxGeometry relative="1" x="-1" as="geometry">
+            <mxPoint x="-19" y="-13" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge3_t" connectable="0" parent="edge3" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontColor=light-dark(#53657D,#53657D);fontFamily=Arial;fontSize=13;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);" value="0..*" vertex="1">
+          <mxGeometry relative="1" x="1" as="geometry">
+            <mxPoint x="19" y="-13" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge4" edge="1" parent="1" source="rute" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=none;endArrow=open;endFill=0;endSize=9;strokeColor=light-dark(#53657D,#53657D);strokeWidth=1.5;fontColor=light-dark(#23374D,#23374D);fontFamily=Arial;fontSize=14;spacing=4;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);exitX=0.5;exitY=1;exitPerimeter=0;entryX=0.5;entryY=0;entryPerimeter=0;" target="jadwal" value="memiliki">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge4_s" connectable="0" parent="edge4" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontColor=light-dark(#53657D,#53657D);fontFamily=Arial;fontSize=13;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);" value="1" vertex="1">
+          <mxGeometry relative="1" x="-1" as="geometry">
+            <mxPoint x="-11" y="16" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge4_t" connectable="0" parent="edge4" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontColor=light-dark(#53657D,#53657D);fontFamily=Arial;fontSize=13;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);" value="0..*" vertex="1">
+          <mxGeometry relative="1" x="1" as="geometry">
+            <mxPoint x="19" y="-15" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge5" edge="1" parent="1" source="users" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=none;endArrow=open;endFill=0;endSize=9;strokeColor=light-dark(#53657D,#53657D);strokeWidth=1.5;fontColor=light-dark(#23374D,#23374D);fontFamily=Arial;fontSize=14;spacing=4;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);exitX=0.24;exitY=0;exitPerimeter=0;entryX=0.24;entryY=1;entryPerimeter=0;" target="keluhan" value="mengirim">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge5_s" connectable="0" parent="edge5" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontColor=light-dark(#53657D,#53657D);fontFamily=Arial;fontSize=13;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);" value="1" vertex="1">
+          <mxGeometry relative="1" x="-1" as="geometry">
+            <mxPoint x="-11" y="-16" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge5_t" connectable="0" parent="edge5" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontColor=light-dark(#53657D,#53657D);fontFamily=Arial;fontSize=13;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);" value="0..*" vertex="1">
+          <mxGeometry relative="1" x="1" as="geometry">
+            <mxPoint x="19" y="15" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge6" edge="1" parent="1" source="users" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=none;endArrow=open;endFill=0;endSize=9;strokeColor=light-dark(#53657D,#53657D);strokeWidth=1.5;fontColor=light-dark(#23374D,#23374D);fontFamily=Arial;fontSize=14;spacing=4;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);exitX=0.74;exitY=0;exitPerimeter=0;entryX=0.74;entryY=1;entryPerimeter=0;" target="keluhan" value="menangani">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge6_s" connectable="0" parent="edge6" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontColor=light-dark(#53657D,#53657D);fontFamily=Arial;fontSize=13;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);" value="1" vertex="1">
+          <mxGeometry relative="1" x="-1" as="geometry">
+            <mxPoint x="-11" y="-16" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge6_t" connectable="0" parent="edge6" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontColor=light-dark(#53657D,#53657D);fontFamily=Arial;fontSize=13;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);" value="0..*" vertex="1">
+          <mxGeometry relative="1" x="1" as="geometry">
+            <mxPoint x="19" y="15" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge7" edge="1" parent="1" source="users" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=none;endArrow=open;endFill=0;endSize=9;strokeColor=light-dark(#53657D,#53657D);strokeWidth=1.5;fontColor=light-dark(#23374D,#23374D);fontFamily=Arial;fontSize=14;spacing=4;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);exitX=0.77;exitY=1;exitPerimeter=0;entryX=0.25;entryY=0;entryPerimeter=0;" target="bayar" value="memverifikasi">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge7_s" connectable="0" parent="edge7" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontColor=light-dark(#53657D,#53657D);fontFamily=Arial;fontSize=13;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);" value="1" vertex="1">
+          <mxGeometry relative="1" x="-1" as="geometry">
+            <mxPoint x="-11" y="16" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge7_t" connectable="0" parent="edge7" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontColor=light-dark(#53657D,#53657D);fontFamily=Arial;fontSize=13;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);" value="0..*" vertex="1">
+          <mxGeometry relative="1" x="1" as="geometry">
+            <mxPoint x="19" y="-15" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge8" edge="1" parent="1" source="users" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=none;endArrow=open;endFill=0;endSize=9;strokeColor=light-dark(#53657D,#53657D);strokeWidth=1.5;fontColor=light-dark(#23374D,#23374D);fontFamily=Arial;fontSize=14;spacing=4;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);exitX=1;exitY=0.29744;exitPerimeter=0;entryX=0;entryY=0.38411;entryPerimeter=0;" target="pesan" value="melakukan">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge8_s" connectable="0" parent="edge8" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontColor=light-dark(#53657D,#53657D);fontFamily=Arial;fontSize=13;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);" value="1" vertex="1">
+          <mxGeometry relative="1" x="-1" as="geometry">
+            <mxPoint x="19" y="-13" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge8_t" connectable="0" parent="edge8" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontColor=light-dark(#53657D,#53657D);fontFamily=Arial;fontSize=13;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);" value="0..*" vertex="1">
+          <mxGeometry relative="1" x="1" as="geometry">
+            <mxPoint x="-19" y="-13" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge9" edge="1" parent="1" source="kursi" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=none;endArrow=open;endFill=0;endSize=9;strokeColor=light-dark(#53657D,#53657D);strokeWidth=1.5;fontColor=light-dark(#23374D,#23374D);fontFamily=Arial;fontSize=14;spacing=4;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);exitX=0.5;exitY=1;exitPerimeter=0;entryX=0.5;entryY=0;entryPerimeter=0;" target="jadwalkursi" value="dialokasikan">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge9_s" connectable="0" parent="edge9" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontColor=light-dark(#53657D,#53657D);fontFamily=Arial;fontSize=13;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);" value="1" vertex="1">
+          <mxGeometry relative="1" x="-1" as="geometry">
+            <mxPoint x="-11" y="16" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge9_t" connectable="0" parent="edge9" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontColor=light-dark(#53657D,#53657D);fontFamily=Arial;fontSize=13;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);" value="0..*" vertex="1">
+          <mxGeometry relative="1" x="1" as="geometry">
+            <mxPoint x="19" y="-15" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge10" edge="1" parent="1" source="jadwal" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=none;endArrow=open;endFill=0;endSize=9;strokeColor=light-dark(#53657D,#53657D);strokeWidth=1.5;fontColor=light-dark(#23374D,#23374D);fontFamily=Arial;fontSize=14;spacing=4;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);exitX=0.52;exitY=1;exitPerimeter=0;entryX=0.52;entryY=0;entryPerimeter=0;" target="pesan" value="dipesan">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge10_s" connectable="0" parent="edge10" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontColor=light-dark(#53657D,#53657D);fontFamily=Arial;fontSize=13;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);" value="1" vertex="1">
+          <mxGeometry relative="1" x="-1" as="geometry">
+            <mxPoint x="-11" y="16" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge10_t" connectable="0" parent="edge10" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontColor=light-dark(#53657D,#53657D);fontFamily=Arial;fontSize=13;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);" value="0..*" vertex="1">
+          <mxGeometry relative="1" x="1" as="geometry">
+            <mxPoint x="19" y="-15" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge11" edge="1" parent="1" source="jadwal" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=none;endArrow=open;endFill=0;endSize=9;strokeColor=light-dark(#53657D,#53657D);strokeWidth=1.5;fontColor=light-dark(#23374D,#23374D);fontFamily=Arial;fontSize=14;spacing=4;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);exitX=1;exitY=0.62;exitPerimeter=0;entryX=0;entryY=0.62;entryPerimeter=0;" target="jadwalkursi" value="memiliki">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge11_s" connectable="0" parent="edge11" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontColor=light-dark(#53657D,#53657D);fontFamily=Arial;fontSize=13;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);" value="1" vertex="1">
+          <mxGeometry relative="1" x="-1" as="geometry">
+            <mxPoint x="19" y="-13" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge11_t" connectable="0" parent="edge11" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontColor=light-dark(#53657D,#53657D);fontFamily=Arial;fontSize=13;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);" value="0..*" vertex="1">
+          <mxGeometry relative="1" x="1" as="geometry">
+            <mxPoint x="-19" y="-13" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge12" edge="1" parent="1" source="jadwal" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=none;endArrow=open;endFill=0;endSize=9;strokeColor=light-dark(#53657D,#53657D);strokeWidth=1.5;fontColor=light-dark(#23374D,#23374D);fontFamily=Arial;fontSize=14;spacing=4;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);exitX=1;exitY=0.87;exitPerimeter=0;entryX=0;entryY=0.23;entryPerimeter=0;" target="detail" value="memiliki detail">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge12_s" connectable="0" parent="edge12" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontColor=light-dark(#53657D,#53657D);fontFamily=Arial;fontSize=13;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);" value="1" vertex="1">
+          <mxGeometry relative="1" x="-1" as="geometry">
+            <mxPoint x="19" y="-13" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge12_t" connectable="0" parent="edge12" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontColor=light-dark(#53657D,#53657D);fontFamily=Arial;fontSize=13;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);" value="0..*" vertex="1">
+          <mxGeometry relative="1" x="1" as="geometry">
+            <mxPoint x="-19" y="-13" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge13" edge="1" parent="1" source="pesan" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=none;endArrow=open;endFill=0;endSize=9;strokeColor=light-dark(#53657D,#53657D);strokeWidth=1.5;fontColor=light-dark(#23374D,#23374D);fontFamily=Arial;fontSize=14;spacing=4;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);exitX=0;exitY=0.17219;exitPerimeter=0;entryX=1;entryY=0.83444;entryPerimeter=0;" target="keluhan" value="terkait">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge13_s" connectable="0" parent="edge13" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontColor=light-dark(#53657D,#53657D);fontFamily=Arial;fontSize=13;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);" value="1" vertex="1">
+          <mxGeometry relative="1" x="-1" as="geometry">
+            <mxPoint x="-19" y="-13" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge13_t" connectable="0" parent="edge13" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontColor=light-dark(#53657D,#53657D);fontFamily=Arial;fontSize=13;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);" value="0..*" vertex="1">
+          <mxGeometry relative="1" x="1" as="geometry">
+            <mxPoint x="19" y="-13" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge14" edge="1" parent="1" source="pesan" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=none;endArrow=open;endFill=0;endSize=9;strokeColor=light-dark(#53657D,#53657D);strokeWidth=1.5;fontColor=light-dark(#23374D,#23374D);fontFamily=Arial;fontSize=14;spacing=4;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);exitX=0.72;exitY=1;exitPerimeter=0;entryX=0.72;entryY=0;entryPerimeter=0;" target="bayar" value="dibayar melalui">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge14_s" connectable="0" parent="edge14" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontColor=light-dark(#53657D,#53657D);fontFamily=Arial;fontSize=13;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);" value="1" vertex="1">
+          <mxGeometry relative="1" x="-1" as="geometry">
+            <mxPoint x="-11" y="16" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge14_t" connectable="0" parent="edge14" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontColor=light-dark(#53657D,#53657D);fontFamily=Arial;fontSize=13;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);" value="0..*" vertex="1">
+          <mxGeometry relative="1" x="1" as="geometry">
+            <mxPoint x="19" y="-15" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge15" edge="1" parent="1" source="pesan" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=none;endArrow=open;endFill=0;endSize=9;strokeColor=light-dark(#53657D,#53657D);strokeWidth=1.5;fontColor=light-dark(#23374D,#23374D);fontFamily=Arial;fontSize=14;spacing=4;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);exitX=1;exitY=0.43709;exitPerimeter=0;entryX=0;entryY=0.61682;entryPerimeter=0;" target="detail" value="memiliki">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge15_s" connectable="0" parent="edge15" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontColor=light-dark(#53657D,#53657D);fontFamily=Arial;fontSize=13;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);" value="1" vertex="1">
+          <mxGeometry relative="1" x="-1" as="geometry">
+            <mxPoint x="19" y="-13" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge15_t" connectable="0" parent="edge15" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontColor=light-dark(#53657D,#53657D);fontFamily=Arial;fontSize=13;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);" value="1..*" vertex="1">
+          <mxGeometry relative="1" x="1" as="geometry">
+            <mxPoint x="-19" y="-13" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge16" edge="1" parent="1" source="jadwalkursi" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=none;endArrow=open;endFill=0;endSize=9;strokeColor=light-dark(#53657D,#53657D);strokeWidth=1.5;fontColor=light-dark(#23374D,#23374D);fontFamily=Arial;fontSize=14;spacing=4;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);exitX=0.5;exitY=1;exitPerimeter=0;entryX=0.5;entryY=0;entryPerimeter=0;" target="detail" value="dialokasikan untuk">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge16_s" connectable="0" parent="edge16" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontColor=light-dark(#53657D,#53657D);fontFamily=Arial;fontSize=13;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);" value="1" vertex="1">
+          <mxGeometry relative="1" x="-1" as="geometry">
+            <mxPoint x="-11" y="16" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge16_t" connectable="0" parent="edge16" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontColor=light-dark(#53657D,#53657D);fontFamily=Arial;fontSize=13;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);" value="0..1" vertex="1">
+          <mxGeometry relative="1" x="1" as="geometry">
+            <mxPoint x="19" y="-15" as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

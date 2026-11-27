@@ -1,0 +1,130 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Page-1" id="w1EksYEdUGQTN7cbAAHc">
+    <mxGraphModel dx="1262" dy="1233" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" background="light-dark(#F8FAFC,#F8FAFC)" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;fillColor=none;strokeColor=none;fontStyle=1;fontSize=34;connectable=0;html=1;whiteSpace=wrap;fontFamily=Arial;align=center;verticalAlign=middle;fontColor=light-dark(#162B46,#162B46);" value="Diagram Konteks Tiket Travel" vertex="1">
+          <mxGeometry height="61" width="1206" x="44" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="divider" parent="1" style="line;html=1;strokeColor=light-dark(#CDD8E6,#CDD8E6);strokeWidth=1.25;connectable=0;" value="" vertex="1">
+          <mxGeometry height="1" width="1206" x="44" y="106" as="geometry" />
+        </mxCell>
+        <mxCell id="member" parent="1" style="rounded=0;fillColor=light-dark(#FFFFFF,#FFFFFF);strokeColor=light-dark(#8295AC,#8295AC);strokeWidth=1.6;fontSize=22;fontStyle=1;html=1;whiteSpace=wrap;fontFamily=Arial;align=center;verticalAlign=middle;fontColor=light-dark(#162B46,#162B46);" value="Member" vertex="1">
+          <mxGeometry height="216" width="184" x="52" y="154" as="geometry" />
+        </mxCell>
+        <mxCell id="operator" parent="1" style="rounded=0;fillColor=light-dark(#FFFFFF,#FFFFFF);strokeColor=light-dark(#8295AC,#8295AC);strokeWidth=1.6;fontSize=22;fontStyle=1;html=1;whiteSpace=wrap;fontFamily=Arial;align=center;verticalAlign=middle;fontColor=light-dark(#162B46,#162B46);" value="Operator" vertex="1">
+          <mxGeometry height="124" width="192" x="1050" y="154" as="geometry" />
+        </mxCell>
+        <mxCell id="admin" parent="1" style="rounded=0;fillColor=light-dark(#FFFFFF,#FFFFFF);strokeColor=light-dark(#8295AC,#8295AC);strokeWidth=1.6;fontSize=22;fontStyle=1;html=1;whiteSpace=wrap;fontFamily=Arial;align=center;verticalAlign=middle;fontColor=light-dark(#162B46,#162B46);" value="Admin" vertex="1">
+          <mxGeometry height="136" width="192" x="1050" y="605" as="geometry" />
+        </mxCell>
+        <mxCell id="system" parent="1" style="ellipse;fillColor=light-dark(#EAF1FB,#EAF1FB);strokeColor=light-dark(#5C80AE,#5C80AE);strokeWidth=2;fontSize=28;fontStyle=1;html=1;whiteSpace=wrap;fontFamily=Arial;align=center;verticalAlign=middle;fontColor=light-dark(#162B46,#162B46);" value="Sistem Tiket&lt;br&gt;Travel" vertex="1">
+          <mxGeometry height="344" width="344" x="500" y="256" as="geometry" />
+        </mxCell>
+        <mxCell id="process-number" connectable="0" parent="system" style="text;fillColor=none;strokeColor=none;movable=0;resizable=0;fontSize=21;fontStyle=1;html=1;whiteSpace=wrap;fontFamily=Arial;align=center;verticalAlign=middle;fontColor=light-dark(#162B46,#162B46);" value="0" vertex="1">
+          <mxGeometry height="30" width="64" x="140" y="33" as="geometry" />
+        </mxCell>
+        <mxCell id="flow1" edge="1" parent="1" source="member" style="edgeStyle=none;noEdgeStyle=1;rounded=0;html=1;startArrow=none;endArrow=block;endSize=8;endFill=1;strokeColor=light-dark(#526780,#526780);strokeWidth=1.55;fontColor=light-dark(#162B46,#162B46);fontFamily=Arial;fontSize=15;align=center;verticalAlign=middle;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);exitX=1;exitY=0.1111111;exitPerimeter=0;entryX=0.1794407;entryY=0.1162791;entryPerimeter=0;" target="system" value="&lt;div style=&quot;line-height:1.15;&quot;&gt;Data akun&lt;/div&gt;">
+          <mxGeometry relative="1" x="0.6017205" as="geometry">
+            <mxPoint y="-12" as="offset" />
+            <Array as="points">
+              <mxPoint x="385" y="178" />
+              <mxPoint x="385" y="296" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow2" edge="1" parent="1" source="admin" style="edgeStyle=none;noEdgeStyle=1;rounded=0;html=1;startArrow=none;endArrow=block;endSize=8;endFill=1;strokeColor=light-dark(#526780,#526780);strokeWidth=1.55;fontColor=light-dark(#162B46,#162B46);fontFamily=Arial;fontSize=15;align=center;verticalAlign=middle;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);exitX=0;exitY=0.5;exitPerimeter=0;entryX=0.952733;entryY=0.7122093;entryPerimeter=0;" target="system" value="&lt;div style=&quot;line-height:1.15;&quot;&gt;Pengelolaan akun&lt;/div&gt;">
+          <mxGeometry relative="1" x="0.6036628" as="geometry">
+            <mxPoint y="-12" as="offset" />
+            <Array as="points">
+              <mxPoint x="984" y="673" />
+              <mxPoint x="984" y="501" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow5" edge="1" parent="1" source="admin" style="edgeStyle=none;noEdgeStyle=1;rounded=0;html=1;startArrow=none;endArrow=block;endSize=8;endFill=1;strokeColor=light-dark(#526780,#526780);strokeWidth=1.55;fontColor=light-dark(#162B46,#162B46);fontFamily=Arial;fontSize=15;align=center;verticalAlign=middle;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);exitX=0;exitY=0.8161765;exitPerimeter=0;entryX=0.8495028;entryY=0.8575581;entryPerimeter=0;" target="system" value="&lt;div style=&quot;line-height:1.15;&quot;&gt;Data kota, rute,&lt;br&gt;kendaraan&lt;/div&gt;">
+          <mxGeometry relative="1" x="0.6126247" as="geometry">
+            <mxPoint y="-22" as="offset" />
+            <Array as="points">
+              <mxPoint x="956" y="716" />
+              <mxPoint x="956" y="551" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow12" edge="1" parent="1" source="member" style="edgeStyle=none;noEdgeStyle=1;rounded=0;html=1;startArrow=none;endArrow=block;endSize=8;endFill=1;strokeColor=light-dark(#526780,#526780);strokeWidth=1.55;fontColor=light-dark(#162B46,#162B46);fontFamily=Arial;fontSize=15;align=center;verticalAlign=middle;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);exitX=1;exitY=0.2638889;exitPerimeter=0;entryX=0.062068;entryY=0.2587209;entryPerimeter=0;" target="system" value="&lt;div style=&quot;line-height:1.15;&quot;&gt;Permintaan tiket dan&lt;br&gt;pilihan kursi&lt;/div&gt;">
+          <mxGeometry relative="1" x="0.6200051" as="geometry">
+            <mxPoint y="-22" as="offset" />
+            <Array as="points">
+              <mxPoint x="362" y="211" />
+              <mxPoint x="362" y="345" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow13" edge="1" parent="1" source="system" style="edgeStyle=none;noEdgeStyle=1;rounded=0;html=1;startArrow=none;endArrow=block;endSize=8;endFill=1;strokeColor=light-dark(#526780,#526780);strokeWidth=1.55;fontColor=light-dark(#162B46,#162B46);fontFamily=Arial;fontSize=15;align=center;verticalAlign=middle;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);exitX=0.0394941;exitY=0.6947674;exitPerimeter=0;entryX=1;entryY=0.7222222;entryPerimeter=0;" target="member" value="&lt;div style=&quot;line-height:1.15;&quot;&gt;Kode booking dan total harga&lt;/div&gt;">
+          <mxGeometry relative="1" x="-0.523146" as="geometry">
+            <mxPoint y="-12" as="offset" />
+            <Array as="points">
+              <mxPoint x="293" y="495" />
+              <mxPoint x="293" y="310" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow20" edge="1" parent="1" source="member" style="edgeStyle=none;noEdgeStyle=1;rounded=0;html=1;startArrow=none;endArrow=block;endSize=8;endFill=1;strokeColor=light-dark(#526780,#526780);strokeWidth=1.55;fontColor=light-dark(#162B46,#162B46);fontFamily=Arial;fontSize=15;align=center;verticalAlign=middle;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);exitX=1;exitY=0.4166667;exitPerimeter=0;entryX=0.0092889;entryY=0.4040698;entryPerimeter=0;" target="system" value="&lt;div style=&quot;line-height:1.15;&quot;&gt;Bukti dan data&lt;br&gt;pembayaran&lt;/div&gt;">
+          <mxGeometry relative="1" x="0.6073716" as="geometry">
+            <mxPoint y="-22" as="offset" />
+            <Array as="points">
+              <mxPoint x="339" y="244" />
+              <mxPoint x="339" y="395" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow21" edge="1" parent="1" source="system" style="edgeStyle=none;noEdgeStyle=1;rounded=0;html=1;startArrow=none;endArrow=block;endSize=8;endFill=1;strokeColor=light-dark(#526780,#526780);strokeWidth=1.55;fontColor=light-dark(#162B46,#162B46);fontFamily=Arial;fontSize=15;align=center;verticalAlign=middle;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);exitX=0.1335018;exitY=0.8401163;exitPerimeter=0;entryX=1;entryY=0.875;entryPerimeter=0;" target="member" value="&lt;div style=&quot;line-height:1.15;&quot;&gt;Informasi pembayaran&lt;/div&gt;">
+          <mxGeometry relative="1" x="-0.4610054" as="geometry">
+            <mxPoint y="-12" as="offset" />
+            <Array as="points">
+              <mxPoint x="270" y="545" />
+              <mxPoint x="270" y="343" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow22" edge="1" parent="1" source="operator" style="edgeStyle=none;noEdgeStyle=1;rounded=0;html=1;startArrow=none;endArrow=block;endSize=8;endFill=1;strokeColor=light-dark(#526780,#526780);strokeWidth=1.55;fontColor=light-dark(#162B46,#162B46);fontFamily=Arial;fontSize=15;align=center;verticalAlign=middle;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);exitX=0;exitY=0.2903226;exitPerimeter=0;entryX=0.8744024;entryY=0.1686047;entryPerimeter=0;" target="system" value="&lt;div style=&quot;line-height:1.15;&quot;&gt;Verifikasi pembayaran&lt;/div&gt;">
+          <mxGeometry relative="1" x="0.5305387" as="geometry">
+            <mxPoint y="-12" as="offset" />
+            <Array as="points">
+              <mxPoint x="976" y="190" />
+              <mxPoint x="976" y="314" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow27" edge="1" parent="1" source="member" style="edgeStyle=none;noEdgeStyle=1;rounded=0;html=1;startArrow=none;endArrow=block;endSize=8;endFill=1;strokeColor=light-dark(#526780,#526780);strokeWidth=1.55;fontColor=light-dark(#162B46,#162B46);fontFamily=Arial;fontSize=15;align=center;verticalAlign=middle;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);exitX=1;exitY=0.5694444;exitPerimeter=0;entryX=0.0024482;entryY=0.5494186;entryPerimeter=0;" target="system" value="&lt;div style=&quot;line-height:1.15;&quot;&gt;Data keluhan&lt;/div&gt;">
+          <mxGeometry relative="1" x="0.5729571" as="geometry">
+            <mxPoint y="-12" as="offset" />
+            <Array as="points">
+              <mxPoint x="316" y="277" />
+              <mxPoint x="316" y="445" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow28" edge="1" parent="1" source="operator" style="edgeStyle=none;noEdgeStyle=1;rounded=0;html=1;startArrow=none;endArrow=block;endSize=8;endFill=1;strokeColor=light-dark(#526780,#526780);strokeWidth=1.55;fontColor=light-dark(#162B46,#162B46);fontFamily=Arial;fontSize=15;align=center;verticalAlign=middle;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);exitX=0;exitY=0.6693548;exitPerimeter=0;entryX=0.9696635;entryY=0.3284884;entryPerimeter=0;" target="system" value="&lt;div style=&quot;line-height:1.15;&quot;&gt;Tanggapan keluhan&lt;/div&gt;">
+          <mxGeometry relative="1" x="0.5022446" as="geometry">
+            <mxPoint y="-12" as="offset" />
+            <Array as="points">
+              <mxPoint x="1007" y="237" />
+              <mxPoint x="1007" y="369" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow30" edge="1" parent="1" source="system" style="edgeStyle=none;noEdgeStyle=1;rounded=0;html=1;startArrow=none;endArrow=block;endSize=8;endFill=1;strokeColor=light-dark(#526780,#526780);strokeWidth=1.55;fontColor=light-dark(#162B46,#162B46);fontFamily=Arial;fontSize=15;align=center;verticalAlign=middle;labelBackgroundColor=light-dark(#F8FAFC,#F8FAFC);exitX=0.9962593;exitY=0.5610465;exitPerimeter=0;entryX=0;entryY=0.1838235;entryPerimeter=0;" target="admin" value="&lt;div style=&quot;line-height:1.15;&quot;&gt;Data keluhan&lt;/div&gt;">
+          <mxGeometry relative="1" x="-0.5640161" as="geometry">
+            <mxPoint y="-12" as="offset" />
+            <Array as="points">
+              <mxPoint x="1012" y="449" />
+              <mxPoint x="1012" y="630" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

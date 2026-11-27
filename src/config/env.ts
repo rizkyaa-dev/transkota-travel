@@ -3,6 +3,17 @@ import { z } from 'zod';
 
 dotenv.config();
 
+function parseEnvBoolean(value: unknown, fallback: boolean): boolean {
+  if (typeof value === 'boolean') return value;
+  if (typeof value === 'number') return value !== 0;
+  if (typeof value === 'string') {
+    const normalized = value.trim().toLowerCase();
+    if (['true', '1', 'yes', 'on'].includes(normalized)) return true;
+    if (['false', '0', 'no', 'off', ''].includes(normalized)) return false;
+  }
+  return fallback;
+}
+
 const envSchema = z.object({
   PORT: z.coerce.number().default(3000),
   NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
@@ -14,6 +25,14 @@ const envSchema = z.object({
   DB_POOL_LIMIT: z.coerce.number().int().min(1).max(50).default(5),
   SESSION_SECRET: z.string().default('secret-travel-session-key-12345'),
   EXPIRY_INTERVAL_MS: z.coerce.number().int().min(0).default(300_000),
+  // Modular Payment Gateway config (switch Sandbox <-> Production strictly via env)
+  PAYMENT_GATEWAY_PROVIDER: z.enum(['midtrans']).default('midtrans'),
+  MIDTRANS_IS_PRODUCTION: z.preprocess((v) => parseEnvBoolean(v, false), z.boolean()),
+  MIDTRANS_SERVER_KEY: z.string().trim().default(''),
+  MIDTRANS_SIGNATURE_KEY: z.string().trim().default(''),
+  MIDTRANS_CLIENT_KEY: z.string().trim().default(''),
+  MIDTRANS_QRIS_ACQUIRER: z.enum(['gopay', 'airpay shopee']).default('gopay'),
+  MIDTRANS_TIMEOUT_MS: z.coerce.number().int().min(1000).max(60_000).default(15_000),
 });
 
 export const env = envSchema.parse(process.env);

@@ -20,6 +20,10 @@ memberRouter.post(
   uploadReceipt.single('bukti'),
   memberController.submitPayment
 );
+memberRouter.post('/pesanan/:kode/bayar/qris', requireAuth, requireRole(['member']), memberController.initiateQrisPayment);
+memberRouter.post('/pesanan/:kode/bayar/qris/cek', requireAuth, requireRole(['member']), memberController.checkQrisPayment);
+memberRouter.get('/pesanan/:kode/bayar/qris/status', requireAuth, requireRole(['member']), memberController.qrisStatusJson);
+memberRouter.post('/pesanan/:kode/bayar/qris/batal', requireAuth, requireRole(['member']), memberController.cancelQrisPayment);
 memberRouter.post('/pesanan/:kode/batal', requireAuth, requireRole(['member']), memberController.cancelOrder);
 memberRouter.get('/pesanan/:kode/cetak', requireAuth, memberController.printTicket);
 

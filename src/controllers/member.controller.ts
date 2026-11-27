@@ -81,11 +81,15 @@ export class MemberController {
       const user = req.session.user!;
       const code = req.params.kode;
       const { booking, payment } = await bookingService.getInvoiceByCode(code, user);
+      const qrisEnabled = paymentService.isQrisGatewayEnabled();
+      const qrisEnvironment = paymentService.getQrisGatewayEnvironment();
 
       res.render('member/invoice', {
         title: `Detail Pesanan Tiket: ${booking.kode_booking}`,
         booking,
-        payment
+        payment,
+        qrisEnabled,
+        qrisEnvironment,
       });
     } catch (err: any) {
       req.flash('error', err.message || 'Pesanan tidak ditemukan.');
@@ -104,14 +108,115 @@ export class MemberController {
         return res.redirect(`/pesanan/${code}`);
       }
 
+      const qrisEnabled = paymentService.isQrisGatewayEnabled();
+      const qrisEnvironment = paymentService.getQrisGatewayEnvironment();
+      const gatewayPayment = qrisEnabled
+        ? await paymentService.getActiveQrisPayment(Number(booking.id), booking.kode_booking)
+        : null;
+
+      const requestedMethod = typeof req.query.metode === 'string' ? req.query.metode.toLowerCase() : '';
+      let activeMethod: 'qris' | 'transfer' = qrisEnabled ? 'qris' : 'transfer';
+      if (requestedMethod === 'transfer') {
+        activeMethod = 'transfer';
+      } else if (requestedMethod === 'qris' && qrisEnabled) {
+        activeMethod = 'qris';
+      }
+
       res.render('member/payment-form', {
-        title: `Unggah Bukti Transfer: ${booking.kode_booking}`,
+        title:
+          activeMethod === 'qris'
+            ? `Pembayaran QRIS: ${booking.kode_booking}`
+            : `Unggah Bukti Transfer: ${booking.kode_booking}`,
         booking,
-        payment
+        payment,
+        qrisEnabled,
+        qrisEnvironment,
+        gatewayPayment,
+        activeMethod,
       });
     } catch (err: any) {
       req.flash('error', err.message);
       res.redirect('/member/pesanan');
+    }
+  }
+
+  async initiateQrisPayment(req: Request, res: Response) {
+    const code = req.params.kode;
+    try {
+      const user = req.session.user!;
+      const qris = await paymentService.initiateQrisPayment(code, user);
+      if (!qris.reused) {
+        req.flash('success', 'Kode QRIS berhasil dibuat. Silakan scan menggunakan aplikasi pembayaran Anda.');
+      }
+      return res.redirect(`/pesanan/${code}/bayar?metode=qris`);
+    } catch (err: any) {
+      req.flash('error', err.message || 'Gagal membuat kode QRIS.');
+      return res.redirect(`/pesanan/${code}/bayar?metode=qris`);
+    }
+  }
+
+  async checkQrisPayment(req: Request, res: Response) {
+    const code = req.params.kode;
+    try {
+      const user = req.session.user!;
+      const result = await paymentService.syncQrisPaymentStatus(code, user);
+
+      if (result.bookingStatus === 'lunas') {
+        req.flash('success', 'Pembayaran QRIS terkonfirmasi! Tiket Anda telah lunas dan siap dicetak.');
+        return res.redirect(`/pesanan/${code}`);
+      }
+      if (result.lateSettlementFlagged) {
+        req.flash(
+          'info',
+          'Pembayaran QRIS diterima setelah masa hold kursi berakhir. Tim kami akan segera memproses rekonsiliasi/pengembalian dana.'
+        );
+        return res.redirect(`/pesanan/${code}`);
+      }
+      if (result.normalizedStatus === 'pending') {
+        req.flash('info', 'Pembayaran QRIS masih menunggu penyelesaian. Silakan selesaikan scan pada aplikasi Anda.');
+      } else {
+        req.flash(
+          'error',
+          `Transaksi QRIS berstatus ${result.normalizedStatus}. Anda dapat membuat kode QRIS baru atau beralih ke transfer bank.`
+        );
+      }
+      return res.redirect(`/pesanan/${code}/bayar?metode=qris`);
+    } catch (err: any) {
+      req.flash('error', err.message || 'Gagal memeriksa status pembayaran QRIS.');
+      return res.redirect(`/pesanan/${code}/bayar?metode=qris`);
+    }
+  }
+
+  async qrisStatusJson(req: Request, res: Response) {
+    const code = req.params.kode;
+    try {
+      const user = req.session.user!;
+      const result = await paymentService.syncQrisPaymentStatus(code, user);
+      return res.status(200).json({ success: true, data: result });
+    } catch (err: any) {
+      return res.status(400).json({
+        success: false,
+        error: { message: err.message || 'Gagal memeriksa status QRIS.' },
+      });
+    }
+  }
+
+  async cancelQrisPayment(req: Request, res: Response) {
+    const code = req.params.kode;
+    const nextTab = req.body?.next_metode === 'transfer' ? 'transfer' : 'qris';
+    try {
+      const user = req.session.user!;
+      await paymentService.cancelActiveQrisPayment(code, user);
+      req.flash(
+        'info',
+        nextTab === 'transfer'
+          ? 'Kode QRIS aktif dibatalkan. Silakan lanjutkan menggunakan Transfer Bank Manual.'
+          : 'Kode QRIS aktif dibatalkan. Anda dapat membuat kode QRIS baru.'
+      );
+      return res.redirect(`/pesanan/${code}/bayar?metode=${nextTab}`);
+    } catch (err: any) {
+      req.flash('error', err.message || 'Gagal membatalkan transaksi QRIS.');
+      return res.redirect(`/pesanan/${code}/bayar?metode=qris`);
     }
   }
 
